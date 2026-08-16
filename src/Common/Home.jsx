@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const departments = [
     {
       name: "Admin",
@@ -75,7 +77,6 @@ const Home = () => {
         {/* ================= HEADER ================= */}
 
         <div className="d-flex justify-content-end align-items-center">
-         
           {/* REGISTER */}
 
           <button
@@ -91,6 +92,7 @@ const Home = () => {
               fontWeight: "600",
               backdropFilter: "blur(8px)",
             }}
+            onClick={() => navigate("/registration")}
           >
             <i className="bi bi-person-plus-fill me-2"></i>
             Register
