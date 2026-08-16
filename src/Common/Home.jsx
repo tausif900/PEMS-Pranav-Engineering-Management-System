@@ -8,41 +8,49 @@ const Home = () => {
       name: "Admin",
       icon: "bi-person-gear",
       color: "#4da3ff",
+      navigate: "/Admin-Login",
     },
     {
       name: "HR",
       icon: "bi-people-fill",
       color: "#a66cff",
+      navigate: "/HR-Login",
     },
     {
       name: "Accounts",
       icon: "bi-calculator-fill",
       color: "#35c98a",
+      navigate: "/Accounts-Login",
     },
     {
       name: "Sales",
       icon: "bi-graph-up-arrow",
       color: "#ff8a3d",
+      navigate: "/Sales-Login",
     },
     {
       name: "Purchase",
       icon: "bi-cart-check-fill",
       color: "#4da3ff",
+      navigate: "/Purchase-Login",
     },
     {
       name: "Stock",
       icon: "bi-box-seam-fill",
       color: "#ffb52e",
+      navigate: "/Stock-Login",
     },
     {
       name: "Import",
       icon: "bi-box-arrow-in-down",
       color: "#36c5c5",
+      navigate: "/Import-Login",
     },
     {
       name: "Export",
       icon: "bi-box-arrow-up",
       color: "#ff5f8f",
+      navigate: "/Export-Login",
     },
   ];
 
@@ -228,6 +236,7 @@ const Home = () => {
 
                     backdropFilter: "blur(5px)",
                   }}
+                  onClick={() => navigate(department.navigate)}
                 >
                   Login
                   <i className="bi bi-arrow-right ms-2"></i>
