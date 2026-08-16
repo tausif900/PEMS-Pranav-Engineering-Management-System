@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+  const navigate = useNavigate();
   return (
     <div
       className="min-vh-100 d-flex align-items-center justify-content-center"
@@ -278,6 +280,7 @@ const AdminLogin = () => {
               fontWeight: "600",
               boxShadow: "0 6px 16px rgba(13,110,253,0.28)",
             }}
+            onClick={() => navigate("/admin-dashboard")}
           >
             Login In
             <i className="bi bi-arrow-right ms-2"></i>

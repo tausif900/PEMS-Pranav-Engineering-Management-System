@@ -5,39 +5,16 @@ const Registration = () => {
     <div
       className="min-vh-100 d-flex align-items-center justify-content-center"
       style={{
-        background:
-          "linear-gradient(135deg, #eaf3ff 0%, #f8fbff 45%, #dfeeff 100%)",
+        backgroundImage:
+          "linear-gradient(135deg, rgba(44, 54, 68, 0.82), rgba(137, 152, 172, 0.75), rgba(140, 158, 178, 0.82)), url('/images/registration-bg.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         padding: "30px 15px",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Decorative Circle */}
-
-      <div
-        style={{
-          position: "absolute",
-          width: "350px",
-          height: "350px",
-          borderRadius: "50%",
-          backgroundColor: "rgba(13,110,253,0.07)",
-          top: "-120px",
-          left: "-100px",
-        }}
-      ></div>
-
-      <div
-        style={{
-          position: "absolute",
-          width: "300px",
-          height: "300px",
-          borderRadius: "50%",
-          backgroundColor: "rgba(13,110,253,0.06)",
-          bottom: "-130px",
-          right: "-80px",
-        }}
-      ></div>
-
       {/* MAIN CARD */}
 
       <div
@@ -48,7 +25,9 @@ const Registration = () => {
           minHeight: "620px",
           borderRadius: "24px",
           overflow: "hidden",
-          backgroundColor: "#ffffff",
+          backgroundColor: "rgba(255, 255, 255, 0.35)",
+          backdropFilter: "blur(1px)",
+          WebkitBackdropFilter: "blur(12px)",
           position: "relative",
           zIndex: "2",
         }}
@@ -61,27 +40,19 @@ const Registration = () => {
           className="col-lg-5 d-flex flex-column justify-content-between"
           style={{
             background:
-              "linear-gradient(145deg, #062c59 0%, #0758a8 55%, #0d6efd 100%)",
+              "linear-gradient(145deg, rgba(13, 82, 167, 0.65), rgba(7,88,168,0.65), rgba(13,110,253,0.65))",
+
+            backdropFilter: "blur(1px)",
+            WebkitBackdropFilter: "blur(15px)",
+
             padding: "40px",
             color: "#ffffff",
             position: "relative",
             overflow: "hidden",
+
+            borderRight: "1px solid rgba(255,255,255,0.25)",
           }}
         >
-          {/* Background Circle */}
-
-          <div
-            style={{
-              position: "absolute",
-              width: "300px",
-              height: "300px",
-              borderRadius: "50%",
-              border: "1px solid rgba(255,255,255,0.12)",
-              right: "-150px",
-              top: "-80px",
-            }}
-          ></div>
-
           <div
             style={{
               position: "absolute",
@@ -258,7 +229,7 @@ const Registration = () => {
             <div>
               <h3
                 style={{
-                  color: "#14243d",
+                  color: "#061225",
                   fontSize: "25px",
                   fontWeight: "700",
                   marginBottom: "6px",
@@ -269,8 +240,8 @@ const Registration = () => {
 
               <p
                 style={{
-                  color: "#7a8798",
-                  fontSize: "12px",
+                  color: "#1c3453",
+                  fontSize: "15px",
                   margin: "0",
                 }}
               >
@@ -306,8 +277,8 @@ const Registration = () => {
               <label
                 className="form-label"
                 style={{
-                  color: "#34445a",
-                  fontSize: "12px",
+                  color: "#0f1f36",
+                  fontSize: "15px",
                   fontWeight: "600",
                 }}
               >
@@ -333,7 +304,7 @@ const Registration = () => {
                   style={{
                     backgroundColor: "#f8fbff",
                     borderColor: "#dce5ef",
-                    fontSize: "12px",
+                    fontSize: "15px",
                     padding: "10px",
                   }}
                 />
@@ -347,8 +318,8 @@ const Registration = () => {
                 <label
                   className="form-label"
                   style={{
-                    color: "#34445a",
-                    fontSize: "12px",
+                    color: "#0f1f36",
+                    fontSize: "15px",
                     fontWeight: "600",
                   }}
                 >
@@ -374,7 +345,7 @@ const Registration = () => {
                     style={{
                       backgroundColor: "#f8fbff",
                       borderColor: "#dce5ef",
-                      fontSize: "12px",
+                      fontSize: "15px",
                       padding: "10px",
                     }}
                   />
@@ -385,8 +356,8 @@ const Registration = () => {
                 <label
                   className="form-label"
                   style={{
-                    color: "#34445a",
-                    fontSize: "12px",
+                    color: "#0f1f36",
+                    fontSize: "15px",
                     fontWeight: "600",
                   }}
                 >
@@ -426,8 +397,8 @@ const Registration = () => {
               <label
                 className="form-label"
                 style={{
-                  color: "#34445a",
-                  fontSize: "12px",
+                  color: "#0f1f36",
+                  fontSize: "15px",
                   fontWeight: "600",
                 }}
               >
@@ -452,7 +423,7 @@ const Registration = () => {
                   style={{
                     backgroundColor: "#f8fbff",
                     borderColor: "#dce5ef",
-                    fontSize: "12px",
+                    fontSize: "15px",
                     padding: "10px",
                     color: "#536176",
                   }}
@@ -480,8 +451,8 @@ const Registration = () => {
                 <label
                   className="form-label"
                   style={{
-                    color: "#34445a",
-                    fontSize: "12px",
+                    color: "#0f1f36",
+                    fontSize: "15px",
                     fontWeight: "600",
                   }}
                 >
@@ -507,7 +478,7 @@ const Registration = () => {
                     style={{
                       backgroundColor: "#f8fbff",
                       borderColor: "#dce5ef",
-                      fontSize: "12px",
+                      fontSize: "15px",
                       padding: "10px",
                     }}
                   />
@@ -518,8 +489,8 @@ const Registration = () => {
                 <label
                   className="form-label"
                   style={{
-                    color: "#34445a",
-                    fontSize: "12px",
+                    color: "#0f1f36",
+                    fontSize: "15px",
                     fontWeight: "600",
                   }}
                 >
@@ -545,7 +516,7 @@ const Registration = () => {
                     style={{
                       backgroundColor: "#f8fbff",
                       borderColor: "#dce5ef",
-                      fontSize: "12px",
+                      fontSize: "15px",
                       padding: "10px",
                     }}
                   />
@@ -562,8 +533,8 @@ const Registration = () => {
                 className="form-check-label"
                 htmlFor="terms"
                 style={{
-                  fontSize: "11px",
-                  color: "#718096",
+                  color: "#0f1f36",
+                  fontSize: "12px",
                 }}
               >
                 I agree to the PEMS terms and conditions.
@@ -581,7 +552,7 @@ const Registration = () => {
                 border: "none",
                 borderRadius: "9px",
                 padding: "11px",
-                fontSize: "13px",
+                fontSize: "20px",
                 fontWeight: "600",
                 boxShadow: "0 6px 15px rgba(13,110,253,0.25)",
               }}
@@ -597,14 +568,15 @@ const Registration = () => {
             className="text-center"
             style={{
               marginTop: "18px",
-              fontSize: "11px",
-              color: "#7a8798",
+              color: "#0f1f36",
+              fontSize: "15px",
             }}
           >
             Already have an account?
             <span
               style={{
-                color: "#0d6efd",
+                color: "#0f53b2",
+                fontSize: "15px",
                 fontWeight: "600",
                 marginLeft: "5px",
                 cursor: "pointer",
