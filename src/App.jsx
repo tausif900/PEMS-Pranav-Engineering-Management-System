@@ -11,6 +11,7 @@ import ImportLogin from "./Components/Authentication/ImportLogin";
 import PurchaseLogin from "./Components/Authentication/PurchaseLogin";
 import SalesLogin from "./Components/Authentication/SalesLogin";
 import StockLogin from "./Components/Authentication/StockLogin";
+import Users from "./Components/Pages/AdminDepartment/Users";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/admin-dashboard",
     element: <AdminDashboard />,
+  },
+  {
+    path: "/admin-users",
+    element: <Users />,
   },
 ]);
 

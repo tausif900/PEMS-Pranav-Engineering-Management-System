@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+  const [activeMenu, setActiveMenu] = useState("Dashboard");
+
   return (
     <div
       className="d-flex"
@@ -67,8 +71,13 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center mb-2"
+          onClick={() => {
+            setActiveMenu("Dashboard");
+            navigate("/admin-dashboard");
+          }}
           style={{
-            backgroundColor: "#1769d5",
+            backgroundColor:
+              activeMenu === "Dashboard" ? "#1769d5" : "transparent",
             borderRadius: "8px",
             padding: "12px",
             fontSize: "14px",
@@ -83,7 +92,12 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center mb-2"
+          onClick={() => {
+            setActiveMenu("Users");
+            navigate("/admin-users");
+          }}
           style={{
+            backgroundColor: activeMenu === "Users" ? "#1769d5" : "transparent",
             padding: "12px",
             borderRadius: "8px",
             fontSize: "14px",
@@ -98,7 +112,10 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center mb-2"
+          onClick={() => setActiveMenu("Departments")}
           style={{
+            backgroundColor:
+              activeMenu === "Departments" ? "#1769d5" : "transparent",
             padding: "12px",
             borderRadius: "8px",
             fontSize: "14px",
@@ -113,7 +130,10 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center mb-2"
+          onClick={() => setActiveMenu("Employees")}
           style={{
+            backgroundColor:
+              activeMenu === "Employees" ? "#1769d5" : "transparent",
             padding: "12px",
             borderRadius: "8px",
             fontSize: "14px",
@@ -128,7 +148,10 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center mb-2"
+          onClick={() => setActiveMenu("Reports")}
           style={{
+            backgroundColor:
+              activeMenu === "Reports" ? "#1769d5" : "transparent",
             padding: "12px",
             borderRadius: "8px",
             fontSize: "14px",
@@ -143,7 +166,10 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center mb-2"
+          onClick={() => setActiveMenu("Settings")}
           style={{
+            backgroundColor:
+              activeMenu === "Settings" ? "#1769d5" : "transparent",
             padding: "12px",
             borderRadius: "8px",
             fontSize: "14px",
@@ -158,7 +184,10 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center"
+          onClick={() => setActiveMenu("Logout")}
           style={{
+            backgroundColor:
+              activeMenu === "Logout" ? "#1769d5" : "transparent",
             padding: "12px",
             borderRadius: "8px",
             fontSize: "14px",
@@ -185,31 +214,29 @@ const AdminDashboard = () => {
             borderBottom: "1px solid #e7ebf2",
           }}
         >
-          {/* SEARCH */}
+          {/* HEADER */}
 
-          <div
-            className="d-flex align-items-center"
-            style={{
-              width: "300px",
-              backgroundColor: "#f5f7fb",
-              border: "1px solid #e1e6ee",
-              borderRadius: "8px",
-              padding: "9px 13px",
-            }}
-          >
-            <i className="bi bi-search me-2" style={{ color: "#7c8799" }}></i>
-
-            <input
-              type="text"
-              placeholder="Search..."
+          <div className="mb-4 pt-4">
+            <h3
               style={{
-                border: "none",
-                outline: "none",
-                backgroundColor: "transparent",
-                width: "100%",
-                fontSize: "13px",
+                fontSize: "25px",
+                fontWeight: "700",
+                color: "#17233f",
+                marginBottom: "5px",
               }}
-            />
+            >
+              Admin Dashboard
+            </h3>
+
+            <p
+              style={{
+                color: "#7b8495",
+                fontSize: "13px",
+                margin: 0,
+              }}
+            >
+              Welcome back! Here's an overview of your organization.
+            </p>
           </div>
 
           {/* RIGHT SIDE */}
@@ -283,31 +310,6 @@ const AdminDashboard = () => {
         {/* ================= CONTENT ================= */}
 
         <div className="p-4">
-          {/* HEADER */}
-
-          <div className="mb-4">
-            <h3
-              style={{
-                fontSize: "25px",
-                fontWeight: "700",
-                color: "#17233f",
-                marginBottom: "5px",
-              }}
-            >
-              Admin Dashboard
-            </h3>
-
-            <p
-              style={{
-                color: "#7b8495",
-                fontSize: "13px",
-                margin: 0,
-              }}
-            >
-              Welcome back! Here's an overview of your organization.
-            </p>
-          </div>
-
           {/* ================= STAT CARDS ================= */}
 
           <div className="row g-4 mb-4">
