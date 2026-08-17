@@ -5,7 +5,7 @@ const Users = () => {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#96afe2",
+        backgroundColor: "#f5f7fb",
         padding: "30px",
         fontFamily: "Arial, sans-serif",
       }}

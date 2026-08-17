@@ -112,7 +112,10 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center mb-2"
-          onClick={() => setActiveMenu("Departments")}
+          onClick={() => {
+            setActiveMenu("Departments");
+            navigate("/admin-departments");
+          }}
           style={{
             backgroundColor:
               activeMenu === "Departments" ? "#1769d5" : "transparent",
@@ -130,7 +133,10 @@ const AdminDashboard = () => {
 
         <div
           className="d-flex align-items-center mb-2"
-          onClick={() => setActiveMenu("Employees")}
+          onClick={() => {
+            setActiveMenu("Employees");
+            navigate("/admin-employees");
+          }}
           style={{
             backgroundColor:
               activeMenu === "Employees" ? "#1769d5" : "transparent",
@@ -313,7 +319,7 @@ const AdminDashboard = () => {
           {/* ================= STAT CARDS ================= */}
 
           <div className="row g-4 mb-4">
-            {/* CARD 1 */}
+            {/* TOTAL EMPLOYEES */}
 
             <div className="col-xl-3 col-md-6">
               <div
@@ -376,7 +382,7 @@ const AdminDashboard = () => {
               </div>
             </div>
 
-            {/* CARD 2 */}
+            {/* TOTAL DEPARTMENTS */}
 
             <div className="col-xl-3 col-md-6">
               <div
@@ -439,7 +445,7 @@ const AdminDashboard = () => {
               </div>
             </div>
 
-            {/* CARD 3 */}
+            {/* PRESENT TODAY */}
 
             <div className="col-xl-3 col-md-6">
               <div
@@ -502,7 +508,7 @@ const AdminDashboard = () => {
               </div>
             </div>
 
-            {/* CARD 4 */}
+            {/* ON LEAVES */}
 
             <div className="col-xl-3 col-md-6">
               <div
@@ -563,6 +569,205 @@ const AdminDashboard = () => {
                   Employees on leave
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* ================= ADD BUTTONS ================= */}
+
+          <div className="row g-4 mb-4">
+            {/* ================= ADD USERS ================= */}
+
+            <div className="col-lg-4 col-md-6">
+              <button
+                className="w-100 border-0 text-start"
+                style={{
+                  background: "linear-gradient(135deg, #1769d5, #2d8cff)",
+                  color: "#ffffff",
+                  borderRadius: "14px",
+                  padding: "22px",
+                  boxShadow: "0 8px 20px rgba(23,105,213,0.20)",
+                  cursor: "pointer",
+                }}
+              >
+                <div className="d-flex align-items-center">
+                  {/* ICON */}
+
+                  <div
+                    className="d-flex align-items-center justify-content-center me-3"
+                    style={{
+                      width: "52px",
+                      height: "52px",
+                      borderRadius: "12px",
+                      backgroundColor: "rgba(255,255,255,0.18)",
+                      fontSize: "23px",
+                    }}
+                  >
+                    <i className="bi bi-person-plus-fill"></i>
+                  </div>
+
+                  {/* TEXT */}
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: "700",
+                        marginBottom: "3px",
+                      }}
+                    >
+                      Add User
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        opacity: "0.85",
+                      }}
+                    >
+                      Create a new system user
+                    </div>
+                  </div>
+
+                  {/* ARROW */}
+
+                  <i
+                    className="bi bi-arrow-right ms-auto"
+                    style={{
+                      fontSize: "19px",
+                    }}
+                  ></i>
+                </div>
+              </button>
+            </div>
+
+            {/* ================= ADD DEPARTMENT ================= */}
+
+            <div className="col-lg-4 col-md-6">
+              <button
+                className="w-100 border-0 text-start"
+                style={{
+                  background: "linear-gradient(135deg, #4b49c6, #716fdf)",
+                  color: "#ffffff",
+                  borderRadius: "14px",
+                  padding: "22px",
+                  boxShadow: "0 8px 20px rgba(75,73,198,0.20)",
+                  cursor: "pointer",
+                }}
+              >
+                <div className="d-flex align-items-center">
+                  {/* ICON */}
+
+                  <div
+                    className="d-flex align-items-center justify-content-center me-3"
+                    style={{
+                      width: "52px",
+                      height: "52px",
+                      borderRadius: "12px",
+                      backgroundColor: "rgba(255,255,255,0.18)",
+                      fontSize: "23px",
+                    }}
+                  >
+                    <i className="bi bi-building-add"></i>
+                  </div>
+
+                  {/* TEXT */}
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: "700",
+                        marginBottom: "3px",
+                      }}
+                    >
+                      Add Department
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        opacity: "0.85",
+                      }}
+                    >
+                      Create a new department
+                    </div>
+                  </div>
+
+                  {/* ARROW */}
+
+                  <i
+                    className="bi bi-arrow-right ms-auto"
+                    style={{
+                      fontSize: "19px",
+                    }}
+                  ></i>
+                </div>
+              </button>
+            </div>
+
+            {/* ================= ADD EMPLOYEE ================= */}
+
+            <div className="col-lg-4 col-md-6">
+              <button
+                className="w-100 border-0 text-start"
+                style={{
+                  background: "linear-gradient(135deg, #159957, #20b66a)",
+                  color: "#ffffff",
+                  borderRadius: "14px",
+                  padding: "22px",
+                  boxShadow: "0 8px 20px rgba(21,153,87,0.20)",
+                  cursor: "pointer",
+                }}
+              >
+                <div className="d-flex align-items-center">
+                  {/* ICON */}
+
+                  <div
+                    className="d-flex align-items-center justify-content-center me-3"
+                    style={{
+                      width: "52px",
+                      height: "52px",
+                      borderRadius: "12px",
+                      backgroundColor: "rgba(255,255,255,0.18)",
+                      fontSize: "23px",
+                    }}
+                  >
+                    <i className="bi bi-person-badge-fill"></i>
+                  </div>
+
+                  {/* TEXT */}
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: "700",
+                        marginBottom: "3px",
+                      }}
+                    >
+                      Add Employee
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        opacity: "0.85",
+                      }}
+                    >
+                      Add a new employee
+                    </div>
+                  </div>
+
+                  {/* ARROW */}
+
+                  <i
+                    className="bi bi-arrow-right ms-auto"
+                    style={{
+                      fontSize: "19px",
+                    }}
+                  ></i>
+                </div>
+              </button>
             </div>
           </div>
 
@@ -686,295 +891,152 @@ const AdminDashboard = () => {
                 </div>
               </div>
             </div>
+            {/* ================= RECENT EMPLOYEES ================= */}
 
-            {/* QUICK ACTIONS */}
-
-            <div className="col-lg-7">
-              <div
-                style={{
-                  backgroundColor: "#ffffff",
-                  borderRadius: "12px",
-                  padding: "22px",
-                  boxShadow: "0 4px 15px rgba(0,0,0,0.06)",
-                  height: "100%",
-                }}
-              >
-                <h5
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: "700",
-                    color: "#17233f",
-                    marginBottom: "20px",
-                  }}
-                >
-                  Quick Actions
-                </h5>
-
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <button
-                      className="btn w-100 text-start"
-                      style={{
-                        backgroundColor: "#edf5ff",
-                        border: "none",
-                        borderRadius: "10px",
-                        padding: "17px",
-                      }}
-                    >
-                      <i
-                        className="bi bi-person-plus-fill me-3"
-                        style={{
-                          color: "#1769d5",
-                          fontSize: "20px",
-                        }}
-                      ></i>
-
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        Add Employee
-                      </span>
-                    </button>
-                  </div>
-
-                  <div className="col-md-6">
-                    <button
-                      className="btn w-100 text-start"
-                      style={{
-                        backgroundColor: "#f0ebff",
-                        border: "none",
-                        borderRadius: "10px",
-                        padding: "17px",
-                      }}
-                    >
-                      <i
-                        className="bi bi-diagram-3-fill me-3"
-                        style={{
-                          color: "#7044d9",
-                          fontSize: "20px",
-                        }}
-                      ></i>
-
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        Manage Departments
-                      </span>
-                    </button>
-                  </div>
-
-                  <div className="col-md-6">
-                    <button
-                      className="btn w-100 text-start"
-                      style={{
-                        backgroundColor: "#eaf9f1",
-                        border: "none",
-                        borderRadius: "10px",
-                        padding: "17px",
-                      }}
-                    >
-                      <i
-                        className="bi bi-file-earmark-bar-graph-fill me-3"
-                        style={{
-                          color: "#18a05b",
-                          fontSize: "20px",
-                        }}
-                      ></i>
-
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        View Reports
-                      </span>
-                    </button>
-                  </div>
-
-                  <div className="col-md-6">
-                    <button
-                      className="btn w-100 text-start"
-                      style={{
-                        backgroundColor: "#fff4e3",
-                        border: "none",
-                        borderRadius: "10px",
-                        padding: "17px",
-                      }}
-                    >
-                      <i
-                        className="bi bi-gear-fill me-3"
-                        style={{
-                          color: "#ef971b",
-                          fontSize: "20px",
-                        }}
-                      ></i>
-
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        System Settings
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ================= RECENT EMPLOYEES ================= */}
-
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              borderRadius: "12px",
-              padding: "22px",
-              boxShadow: "0 4px 15px rgba(0,0,0,0.06)",
-            }}
-          >
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <div>
-                <h5
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: "700",
-                    marginBottom: "4px",
-                  }}
-                >
-                  Recent Employees
-                </h5>
-
-                <p
-                  style={{
-                    fontSize: "11px",
-                    color: "#7b8495",
-                    margin: 0,
-                  }}
-                >
-                  Recently added employees
-                </p>
-              </div>
-
-              <button className="btn btn-outline-primary btn-sm">
-                View All
-              </button>
-            </div>
-
-            <div className="table-responsive">
-              <table className="table align-middle">
-                <thead>
-                  <tr
+            <div
+              className="col-lg-7"
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: "12px",
+                padding: "22px",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.06)",
+              }}
+            >
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                  <h5
                     style={{
-                      fontSize: "12px",
-                      color: "#7b8495",
+                      fontSize: "16px",
+                      fontWeight: "700",
+                      marginBottom: "4px",
                     }}
                   >
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Designation</th>
-                    <th>Joining Date</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
+                    Recent Employees
+                  </h5>
 
-                <tbody>
-                  <tr>
-                    <td
+                  <p
+                    style={{
+                      fontSize: "11px",
+                      color: "#7b8495",
+                      margin: 0,
+                    }}
+                  >
+                    Recently added employees
+                  </p>
+                </div>
+
+                <button className="btn btn-outline-primary btn-sm">
+                  View All
+                </button>
+              </div>
+
+              <div className="table-responsive">
+                <table className="table align-middle">
+                  <thead>
+                    <tr
                       style={{
-                        fontSize: "13px",
-                        fontWeight: "600",
+                        fontSize: "12px",
+                        color: "#7b8495",
                       }}
                     >
-                      Rahul Sharma
-                    </td>
+                      <th>Name</th>
+                      <th>Department</th>
+                      <th>Designation</th>
+                      <th>Joining Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
 
-                    <td style={{ fontSize: "12px" }}>Engineering</td>
-
-                    <td style={{ fontSize: "12px" }}>Engineer</td>
-
-                    <td style={{ fontSize: "12px" }}>12 Aug 2026</td>
-
-                    <td>
-                      <span
-                        className="badge"
+                  <tbody>
+                    <tr>
+                      <td
                         style={{
-                          backgroundColor: "#e6f8ee",
-                          color: "#159957",
+                          fontSize: "13px",
+                          fontWeight: "600",
                         }}
                       >
-                        Active
-                      </span>
-                    </td>
-                  </tr>
+                        Rahul Sharma
+                      </td>
 
-                  <tr>
-                    <td
-                      style={{
-                        fontSize: "13px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Priya Patel
-                    </td>
+                      <td style={{ fontSize: "12px" }}>Engineering</td>
 
-                    <td style={{ fontSize: "12px" }}>HR</td>
+                      <td style={{ fontSize: "12px" }}>Engineer</td>
 
-                    <td style={{ fontSize: "12px" }}>HR Executive</td>
+                      <td style={{ fontSize: "12px" }}>12 Aug 2026</td>
 
-                    <td style={{ fontSize: "12px" }}>08 Aug 2026</td>
+                      <td>
+                        <span
+                          className="badge"
+                          style={{
+                            backgroundColor: "#e6f8ee",
+                            color: "#159957",
+                          }}
+                        >
+                          Active
+                        </span>
+                      </td>
+                    </tr>
 
-                    <td>
-                      <span
-                        className="badge"
+                    <tr>
+                      <td
                         style={{
-                          backgroundColor: "#e6f8ee",
-                          color: "#159957",
+                          fontSize: "13px",
+                          fontWeight: "600",
                         }}
                       >
-                        Active
-                      </span>
-                    </td>
-                  </tr>
+                        Priya Patel
+                      </td>
 
-                  <tr>
-                    <td
-                      style={{
-                        fontSize: "13px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Ahmed Khan
-                    </td>
+                      <td style={{ fontSize: "12px" }}>HR</td>
 
-                    <td style={{ fontSize: "12px" }}>Accounts</td>
+                      <td style={{ fontSize: "12px" }}>HR Executive</td>
 
-                    <td style={{ fontSize: "12px" }}>Accountant</td>
+                      <td style={{ fontSize: "12px" }}>08 Aug 2026</td>
 
-                    <td style={{ fontSize: "12px" }}>05 Aug 2026</td>
+                      <td>
+                        <span
+                          className="badge"
+                          style={{
+                            backgroundColor: "#e6f8ee",
+                            color: "#159957",
+                          }}
+                        >
+                          Active
+                        </span>
+                      </td>
+                    </tr>
 
-                    <td>
-                      <span
-                        className="badge"
+                    <tr>
+                      <td
                         style={{
-                          backgroundColor: "#e6f8ee",
-                          color: "#159957",
+                          fontSize: "13px",
+                          fontWeight: "600",
                         }}
                       >
-                        Active
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        Ahmed Khan
+                      </td>
+
+                      <td style={{ fontSize: "12px" }}>Accounts</td>
+
+                      <td style={{ fontSize: "12px" }}>Accountant</td>
+
+                      <td style={{ fontSize: "12px" }}>05 Aug 2026</td>
+
+                      <td>
+                        <span
+                          className="badge"
+                          style={{
+                            backgroundColor: "#e6f8ee",
+                            color: "#159957",
+                          }}
+                        >
+                          Active
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

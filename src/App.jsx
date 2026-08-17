@@ -12,6 +12,8 @@ import PurchaseLogin from "./Components/Authentication/PurchaseLogin";
 import SalesLogin from "./Components/Authentication/SalesLogin";
 import StockLogin from "./Components/Authentication/StockLogin";
 import Users from "./Components/Pages/AdminDepartment/Users";
+import Departments from "./Components/Pages/AdminDepartment/Departments";
+import Employees from "./Components/Pages/AdminDepartment/Employees";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +63,14 @@ const router = createBrowserRouter([
   {
     path: "/admin-users",
     element: <Users />,
+  },
+  {
+    path: "/admin-departments",
+    element: <Departments />,
+  },
+  {
+    path: "/admin-employees",
+    element: <Employees />,
   },
 ]);
 
