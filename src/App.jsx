@@ -14,6 +14,8 @@ import StockLogin from "./Components/Authentication/StockLogin";
 import Users from "./Components/Pages/AdminDepartment/Users";
 import Departments from "./Components/Pages/AdminDepartment/Departments";
 import Employees from "./Components/Pages/AdminDepartment/Employees";
+import AccountsDashboard from "./Components/Pages/AccountsDeoartment/AccountsDashboard";
+import CreateInvoice from "./Components/Pages/AccountsDeoartment/CreateInvoice";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +73,14 @@ const router = createBrowserRouter([
   {
     path: "/admin-employees",
     element: <Employees />,
+  },
+  {
+    path: "/accounts-dashboard",
+    element: <AccountsDashboard />,
+  },
+  {
+    path: "/accounts-create-invoice",
+    element: <CreateInvoice />,
   },
 ]);
 
