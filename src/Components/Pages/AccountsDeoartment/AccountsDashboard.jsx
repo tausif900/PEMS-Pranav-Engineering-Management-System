@@ -679,20 +679,36 @@ const AccountsDashboard = () => {
             </span>
           </div>
 
-          <button
-            className="btn"
-            style={{
-              backgroundColor: "#1769d5",
-              color: "#ffffff",
-              borderRadius: "7px",
-              fontSize: "13px",
-              padding: "9px 15px",
-            }}
-            onClick={() => navigate("/accounts-create-invoice")}
-          >
-            <i className="bi bi-plus-lg me-2"></i>
-            Create Invoice
-          </button>
+          <div>
+            {" "}
+            <button
+              className="btn m-2"
+              style={{
+                backgroundColor: "#1769d5",
+                color: "#ffffff",
+                borderRadius: "7px",
+                fontSize: "15px",
+                padding: "9px 15px",
+              }}
+              onClick={() => navigate("/accounts/all-generated-bills")}
+            >
+              View All Invoices
+            </button>
+            <button
+              className="btn"
+              style={{
+                backgroundColor: "#1769d5",
+                color: "#ffffff",
+                borderRadius: "7px",
+                fontSize: "15px",
+                padding: "9px 15px",
+              }}
+              onClick={() => navigate("/accounts-create-invoice")}
+            >
+              <i className="bi bi-plus-lg me-2"></i>
+              Create Invoice
+            </button>
+          </div>
         </div>
 
         <div className="table-responsive">

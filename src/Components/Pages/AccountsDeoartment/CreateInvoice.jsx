@@ -547,6 +547,7 @@ const CreateInvoice = () => {
               borderRadius: "7px",
               fontWeight: "600",
             }}
+            onClick={() => navigate("/accounts/invoice-preview")}
           >
             <i className="bi bi-file-earmark-check me-2"></i>
             Generate Invoice

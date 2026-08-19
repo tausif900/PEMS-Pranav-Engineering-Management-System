@@ -16,6 +16,8 @@ import Departments from "./Components/Pages/AdminDepartment/Departments";
 import Employees from "./Components/Pages/AdminDepartment/Employees";
 import AccountsDashboard from "./Components/Pages/AccountsDeoartment/AccountsDashboard";
 import CreateInvoice from "./Components/Pages/AccountsDeoartment/CreateInvoice";
+import InvoicePreview from "./Components/Pages/AccountsDeoartment/InvoicePreview";
+import ViewAllGeneratedInvoices from "./Components/Pages/AccountsDeoartment/ViewAllGeneratedInvoices";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +83,14 @@ const router = createBrowserRouter([
   {
     path: "/accounts-create-invoice",
     element: <CreateInvoice />,
+  },
+  {
+    path: "/accounts/invoice-preview",
+    element: <InvoicePreview />,
+  },
+  {
+    path: "/accounts/all-generated-bills",
+    element: <ViewAllGeneratedInvoices />,
   },
 ]);
 
