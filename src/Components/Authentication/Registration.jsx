@@ -562,30 +562,6 @@ const Registration = () => {
             </button>
           </form>
 
-          {/* LOGIN */}
-
-          <div
-            className="text-center"
-            style={{
-              marginTop: "18px",
-              color: "#0f1f36",
-              fontSize: "15px",
-            }}
-          >
-            Already have an account?
-            <span
-              style={{
-                color: "#0f53b2",
-                fontSize: "15px",
-                fontWeight: "600",
-                marginLeft: "5px",
-                cursor: "pointer",
-              }}
-            >
-              Login here
-            </span>
-          </div>
-
           {/* FOOTER */}
 
           <div
