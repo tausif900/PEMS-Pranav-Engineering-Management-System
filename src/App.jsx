@@ -18,6 +18,7 @@ import AccountsDashboard from "./Components/Pages/AccountsDeoartment/AccountsDas
 import CreateInvoice from "./Components/Pages/AccountsDeoartment/CreateInvoice";
 import InvoicePreview from "./Components/Pages/AccountsDeoartment/InvoicePreview";
 import DomesticBills from "./Components/Pages/AccountsDeoartment/DomesticBills";
+import InternationalBills from "./Components/Pages/AccountsDeoartment/InternationalBills";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
   {
     path: "/accounts/all-domestic-bills",
     element: <DomesticBills />,
+  },
+  {
+    path: "/accounts/all-international-bills",
+    element: <InternationalBills />,
   },
 ]);
 

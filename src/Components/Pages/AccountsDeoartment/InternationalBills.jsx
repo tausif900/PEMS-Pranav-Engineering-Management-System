@@ -1,15 +1,13 @@
 import React from "react";
 
-const DomesticBills = () => {
+const InternationalBills = () => {
   return (
     <div className="container-fluid bg-light min-vh-100 p-4">
       {/* Page Header */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h2 className="fw-bold mb-1">Domestic Bills</h2>
-          <p className="text-muted mb-0">
-            View all generated domestic bills
-          </p>
+          <p className="text-muted mb-0">View all generated International bills</p>
         </div>
       </div>
 
@@ -44,13 +42,13 @@ const DomesticBills = () => {
         </div>
       </div>
 
-      {/* Domestic Bills */}
-      <div className="card border-0 shadow-sm mb-4">
+      {/* International Bills */}
+      <div className="card border-0 shadow-sm">
         <div className="card-header bg-white py-3">
           <div className="d-flex justify-content-between align-items-center">
-            <h5 className="fw-bold mb-0">Domestic Bills</h5>
+            <h5 className="fw-bold mb-0">International Bills</h5>
 
-            <span className="badge bg-primary">12 Bills</span>
+            <span className="badge bg-dark">8 Bills</span>
           </div>
         </div>
 
@@ -62,6 +60,7 @@ const DomesticBills = () => {
                   <th>Invoice No.</th>
                   <th>Date</th>
                   <th>Customer</th>
+                  <th>Country</th>
                   <th>Amount</th>
                   <th>Status</th>
                   <th className="text-center">Action</th>
@@ -70,10 +69,11 @@ const DomesticBills = () => {
 
               <tbody>
                 <tr>
-                  <td className="fw-semibold">DOM-001</td>
+                  <td className="fw-semibold">INT-001</td>
                   <td>19 Aug 2026</td>
-                  <td>ABC Industries</td>
-                  <td>₹45,500</td>
+                  <td>Global Auto Parts</td>
+                  <td>UAE</td>
+                  <td>$2,450</td>
                   <td>
                     <span className="badge bg-success">Paid</span>
                   </td>
@@ -89,10 +89,11 @@ const DomesticBills = () => {
                 </tr>
 
                 <tr>
-                  <td className="fw-semibold">DOM-002</td>
-                  <td>18 Aug 2026</td>
-                  <td>XYZ Engineering</td>
-                  <td>₹28,750</td>
+                  <td className="fw-semibold">INT-002</td>
+                  <td>16 Aug 2026</td>
+                  <td>Euro Machinery Ltd.</td>
+                  <td>Germany</td>
+                  <td>€3,800</td>
                   <td>
                     <span className="badge bg-warning text-dark">Pending</span>
                   </td>
@@ -108,10 +109,11 @@ const DomesticBills = () => {
                 </tr>
 
                 <tr>
-                  <td className="fw-semibold">DOM-003</td>
-                  <td>17 Aug 2026</td>
-                  <td>Prakash Motors</td>
-                  <td>₹67,200</td>
+                  <td className="fw-semibold">INT-003</td>
+                  <td>12 Aug 2026</td>
+                  <td>Industrial Filters Inc.</td>
+                  <td>USA</td>
+                  <td>$5,200</td>
                   <td>
                     <span className="badge bg-success">Paid</span>
                   </td>
@@ -130,9 +132,8 @@ const DomesticBills = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
 
-export default DomesticBills;
+export default InternationalBills;
