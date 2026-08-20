@@ -1,6 +1,6 @@
 import React from "react";
 
-const ViewAllGeneratedInvoices = () => {
+const DomesticBills = () => {
   return (
     <div className="container-fluid bg-light min-vh-100 p-4">
       {/* Page Header */}
@@ -225,4 +225,4 @@ const ViewAllGeneratedInvoices = () => {
   );
 };
 
-export default ViewAllGeneratedInvoices;
+export default DomesticBills;
