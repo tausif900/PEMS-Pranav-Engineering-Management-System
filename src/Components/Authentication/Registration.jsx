@@ -1,6 +1,31 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { api } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const registerUser = async (data) => {
+    try {
+      const response = await api.post("/user/register", data);
+      console.log(response.data);
+      alert("Registration done successfully");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const password = watch("password");
+
   return (
     <div
       className="min-vh-100 d-flex align-items-center justify-content-center"
@@ -270,7 +295,7 @@ const Registration = () => {
 
           {/* FORM */}
 
-          <form>
+          <form onSubmit={handleSubmit(registerUser)}>
             {/* FULL NAME */}
 
             <div className="mb-3">
@@ -284,7 +309,6 @@ const Registration = () => {
               >
                 Full Name
               </label>
-
               <div className="input-group">
                 <span
                   className="input-group-text"
@@ -307,8 +331,22 @@ const Registration = () => {
                     fontSize: "15px",
                     padding: "10px",
                   }}
+                  {...register("name", {
+                    required: "name is required",
+                    minLength: {
+                      value: 2,
+                      message: "full name must be at least 2 character",
+                    },
+                    maxLength: {
+                      value: 60,
+                      message: "maximum 60 characters allow",
+                    },
+                  })}
                 />
-              </div>
+              </div>{" "}
+              {errors.name && (
+                <small className="text-danger">{errors.name.message}</small>
+              )}
             </div>
 
             {/* EMAIL + PHONE */}
@@ -348,8 +386,19 @@ const Registration = () => {
                       fontSize: "15px",
                       padding: "10px",
                     }}
+                    {...register("email", {
+                      required: "email is required",
+                      pattern: {
+                        value:
+                          /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
+                        message: "Please enter a valid email address",
+                      },
+                    })}
                   />
                 </div>
+                {errors.email && (
+                  <small className="text-danger">{errors.email.message}</small>
+                )}
               </div>
 
               <div className="col-md-6 mb-3">
@@ -386,8 +435,23 @@ const Registration = () => {
                       fontSize: "12px",
                       padding: "10px",
                     }}
+                    {...register("phoneNumber", {
+                      required: "provide a phone number",
+                      minLength: {
+                        value: 10,
+                        message: "number cannot be less than 10 digit",
+                      },
+                      maxLength: {
+                        value: 10,
+                        message: "number cannot exceeds after 10 digit",
+                      },
+                    })}
                   />
                 </div>
+
+                {errors.phoneNumber && (
+                  <small className="text-danger">{errors.phNo.message}</small>
+                )}
               </div>
             </div>
 
@@ -427,21 +491,27 @@ const Registration = () => {
                     padding: "10px",
                     color: "#536176",
                   }}
+                  {...register("role", {
+                    required: "Please select your role",
+                  })}
                 >
                   <option value="" disabled>
                     Choose your department
                   </option>
 
-                  <option>Admin</option>
-                  <option>HR</option>
-                  <option>Accounts</option>
-                  <option>Sales</option>
-                  <option>Purchase</option>
-                  <option>Stock</option>
-                  <option>Import</option>
-                  <option>Export</option>
+                  <option value="ROLE_ADMIN">Admin</option>
+                  <option value="ROLE_HR">HR</option>
+                  <option value="ROLE_ACCOUNTS">Accounts</option>
+                  <option value="ROLE_SALES">Sales</option>
+                  <option value="ROLE_PURCHASE">Purchase</option>
+                  <option value="ROLE_STOCK">Stock</option>
+                  <option value="ROLE_IMPORT">Import</option>
+                  <option value="ROLE_EXPORT">Export</option>
                 </select>
               </div>
+              {errors.role && (
+                <small className="text-danger">{errors.role.message}</small>
+              )}
             </div>
 
             {/* PASSWORD */}
@@ -481,8 +551,22 @@ const Registration = () => {
                       fontSize: "15px",
                       padding: "10px",
                     }}
+                    {...register("password", {
+                      required: "password is required",
+                      pattern: {
+                        value:
+                          /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/,
+                        message:
+                          "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+                      },
+                    })}
                   />
                 </div>
+                {errors.password && (
+                  <small className="text-danger">
+                    {errors.password.message}
+                  </small>
+                )}
               </div>
 
               <div className="col-md-6 mb-3">
@@ -519,8 +603,22 @@ const Registration = () => {
                       fontSize: "15px",
                       padding: "10px",
                     }}
+                    {...register("confirmPassword", {
+                      required: "confirm password is required",
+                      validate: (value) => {
+                        return (
+                          value === password ||
+                          "password and confirm password is not matching"
+                        );
+                      },
+                    })}
                   />
                 </div>
+                {errors.confirmPassword && (
+                  <small className="text-danger">
+                    {errors.confirmPassword.message}
+                  </small>
+                )}
               </div>
             </div>
 
@@ -544,7 +642,7 @@ const Registration = () => {
             {/* REGISTER BUTTON */}
 
             <button
-              type="button"
+              type="submit"
               className="btn w-100"
               style={{
                 background: "linear-gradient(90deg, #0758a8, #0d6efd)",
