@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { api } from "../api";
 import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const navigate = useNavigate();
+
+  const [departments, setDepartments] = useState([]);
+
+  const getDepartments = async () => {
+    try {
+      const response = await api.get("/departments");
+      console.log(response.data);
+      setDepartments(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const {
     register,
@@ -25,6 +37,10 @@ const Registration = () => {
   };
 
   const password = watch("password");
+
+  useEffect(() => {
+    getDepartments();
+  }, []);
 
   return (
     <div
@@ -450,7 +466,9 @@ const Registration = () => {
                 </div>
 
                 {errors.phoneNumber && (
-                  <small className="text-danger">{errors.phNo.message}</small>
+                  <small className="text-danger">
+                    {errors.phoneNumber.message}
+                  </small>
                 )}
               </div>
             </div>
@@ -491,26 +509,21 @@ const Registration = () => {
                     padding: "10px",
                     color: "#536176",
                   }}
-                  {...register("role", {
+                  {...register("departmentId", {
                     required: "Please select your role",
                   })}
                 >
-                  <option value="" disabled>
-                    Choose your department
-                  </option>
-
-                  <option value="ROLE_ADMIN">Admin</option>
-                  <option value="ROLE_HR">HR</option>
-                  <option value="ROLE_ACCOUNTS">Accounts</option>
-                  <option value="ROLE_SALES">Sales</option>
-                  <option value="ROLE_PURCHASE">Purchase</option>
-                  <option value="ROLE_STOCK">Stock</option>
-                  <option value="ROLE_IMPORT">Import</option>
-                  <option value="ROLE_EXPORT">Export</option>
+                  {departments.map((d) => {
+                    return (
+                      <option value={d.departmentId}>{d.departmentName}</option>
+                    );
+                  })}
                 </select>
               </div>
-              {errors.role && (
-                <small className="text-danger">{errors.role.message}</small>
+              {errors.departmentId && (
+                <small className="text-danger">
+                  {errors.departmentId.message}
+                </small>
               )}
             </div>
 

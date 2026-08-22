@@ -19,6 +19,7 @@ import CreateInvoice from "./Components/Pages/AccountsDeoartment/CreateInvoice";
 import InvoicePreview from "./Components/Pages/AccountsDeoartment/InvoicePreview";
 import DomesticBills from "./Components/Pages/AccountsDeoartment/DomesticBills";
 import InternationalBills from "./Components/Pages/AccountsDeoartment/InternationalBills";
+import AddDepartment from "./Components/Pages/AdminDepartment/AddDepartment";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
   {
     path: "/admin-employees",
     element: <Employees />,
+  },
+  {
+    path: "/admin/add-department",
+    element: <AddDepartment />,
   },
   {
     path: "/accounts-dashboard",

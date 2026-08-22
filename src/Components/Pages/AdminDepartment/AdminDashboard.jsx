@@ -575,76 +575,12 @@ const AdminDashboard = () => {
           {/* ================= ADD BUTTONS ================= */}
 
           <div className="row g-4 mb-4">
-            {/* ================= ADD USERS ================= */}
-
-            <div className="col-lg-4 col-md-6">
-              <button
-                className="w-100 border-0 text-start"
-                style={{
-                  background: "linear-gradient(135deg, #1769d5, #2d8cff)",
-                  color: "#ffffff",
-                  borderRadius: "14px",
-                  padding: "22px",
-                  boxShadow: "0 8px 20px rgba(23,105,213,0.20)",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="d-flex align-items-center">
-                  {/* ICON */}
-
-                  <div
-                    className="d-flex align-items-center justify-content-center me-3"
-                    style={{
-                      width: "52px",
-                      height: "52px",
-                      borderRadius: "12px",
-                      backgroundColor: "rgba(255,255,255,0.18)",
-                      fontSize: "23px",
-                    }}
-                  >
-                    <i className="bi bi-person-plus-fill"></i>
-                  </div>
-
-                  {/* TEXT */}
-
-                  <div>
-                    <div
-                      style={{
-                        fontSize: "17px",
-                        fontWeight: "700",
-                        marginBottom: "3px",
-                      }}
-                    >
-                      Add User
-                    </div>
-
-                    <div
-                      style={{
-                        fontSize: "12px",
-                        opacity: "0.85",
-                      }}
-                    >
-                      Create a new system user
-                    </div>
-                  </div>
-
-                  {/* ARROW */}
-
-                  <i
-                    className="bi bi-arrow-right ms-auto"
-                    style={{
-                      fontSize: "19px",
-                    }}
-                  ></i>
-                </div>
-              </button>
-            </div>
-
             {/* ================= ADD DEPARTMENT ================= */}
 
             <div className="col-lg-4 col-md-6">
               <button
                 className="w-100 border-0 text-start"
+                onClick={() => navigate("/admin/add-department")}
                 style={{
                   background: "linear-gradient(135deg, #4b49c6, #716fdf)",
                   color: "#ffffff",
