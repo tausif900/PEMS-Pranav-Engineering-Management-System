@@ -26,7 +26,14 @@ const Registration = () => {
   } = useForm();
 
   const registerUser = async (data) => {
+    console.log(data);
     try {
+      const selectedDepartment = departments.find(
+        (d) => d.departmentId == data.departmentId,
+      );
+      console.log(selectedDepartment);
+      data.role = `ROLE_${selectedDepartment.departmentName}`;
+
       const response = await api.post("/user/register", data);
       console.log(response.data);
       alert("Registration done successfully");
