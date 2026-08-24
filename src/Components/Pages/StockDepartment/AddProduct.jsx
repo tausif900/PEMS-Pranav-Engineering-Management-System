@@ -1,8 +1,24 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../api";
 
 const AddProduct = () => {
   const navigate = useNavigate();
+  const { register, handleSubmit, reset } = useForm();
+
+  const addProduct = async (data) => {
+    console.log(data);
+    try {
+      const response = await api.post("/products/add-product", data);
+      console.log(response.data);
+      alert("Product added in stock!!!");
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div
       style={{
@@ -61,7 +77,8 @@ const AddProduct = () => {
       </div>
 
       {/* Main Card */}
-      <div
+      <form
+        onSubmit={handleSubmit(addProduct)}
         style={{
           maxWidth: "1000px",
           margin: "0 auto",
@@ -96,12 +113,29 @@ const AddProduct = () => {
           >
             <div>
               <label style={labelStyle}>Product Name</label>
-              <input placeholder="Enter Product Name..." style={inputStyle} />
+              <input
+                placeholder="Enter Product Name..."
+                style={inputStyle}
+                {...register("productName")}
+              />
             </div>
 
             <div>
               <label style={labelStyle}>Product Code</label>
-              <input placeholder="Enter Product Code..." style={inputStyle} />
+              <input
+                placeholder="Enter Product Code..."
+                style={inputStyle}
+                {...register("productCode")}
+              />
+            </div>
+
+            <div>
+              <label style={labelStyle}>Product Description</label>
+              <input
+                placeholder="Enter Description..."
+                style={inputStyle}
+                {...register("productDescription")}
+              />
             </div>
 
             <div>
@@ -110,15 +144,17 @@ const AddProduct = () => {
                 type="text"
                 placeholder="Enter quantity"
                 style={inputStyle}
+                {...register("quantity")}
               />
             </div>
 
             <div>
-              <label style={labelStyle}>Purchase Price</label>
+              <label style={labelStyle}> ₹ Purchase Price / product</label>
               <input
                 type="text"
                 placeholder="Enter purchase price"
                 style={inputStyle}
+                {...register("purchasePrice")}
               />
             </div>
 
@@ -128,6 +164,7 @@ const AddProduct = () => {
                 type="text"
                 placeholder="Example: Rack A-02"
                 style={inputStyle}
+                {...register("productLocation")}
               />
             </div>
 
@@ -137,49 +174,37 @@ const AddProduct = () => {
                 type="text"
                 placeholder="Enter supplier name"
                 style={inputStyle}
+                {...register("supplier")}
               />
             </div>
-          </div>
 
-          {/* Buttons */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              gap: "12px",
-              marginTop: "30px",
-            }}
-          >
-            <button
+            {/* Buttons */}
+            <div
               style={{
-                padding: "12px 24px",
-                borderRadius: "8px",
-                border: "1px solid #987238",
-                background: "transparent",
-                color: "#ead4a5",
-                cursor: "pointer",
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
               }}
             >
-              Cancel
-            </button>
-
-            <button
-              style={{
-                padding: "12px 28px",
-                borderRadius: "8px",
-                border: "none",
-                background: "linear-gradient(135deg, #c28c2c, #8f641d)",
-                color: "#fff8e7",
-                fontWeight: "600",
-                cursor: "pointer",
-                boxShadow: "0 5px 15px rgba(0,0,0,0.25)",
-              }}
-            >
-              + Add to Stock
-            </button>
+              <button
+                type="submit"
+                style={{
+                  padding: "12px 28px",
+                  borderRadius: "8px",
+                  border: "none",
+                  background: "linear-gradient(135deg, #c28c2c, #8f641d)",
+                  color: "#fff8e7",
+                  fontWeight: "600",
+                  cursor: "pointer",
+                  boxShadow: "0 5px 15px rgba(0,0,0,0.25)",
+                }}
+              >
+                + Add Product in Stock
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
