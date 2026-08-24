@@ -20,6 +20,9 @@ import InvoicePreview from "./Components/Pages/AccountsDeoartment/InvoicePreview
 import DomesticBills from "./Components/Pages/AccountsDeoartment/DomesticBills";
 import InternationalBills from "./Components/Pages/AccountsDeoartment/InternationalBills";
 import AddDepartment from "./Components/Pages/AdminDepartment/AddDepartment";
+import StockDashboard from "./Components/Pages/StockDepartment/StockDashboard";
+import AddProduct from "./Components/Pages/StockDepartment/AddProduct";
+import ViewAllProducts from "./Components/Pages/StockDepartment/ViewAllProducts";
 
 const router = createBrowserRouter([
   {
@@ -101,6 +104,18 @@ const router = createBrowserRouter([
   {
     path: "/accounts/all-international-bills",
     element: <InternationalBills />,
+  },
+  {
+    path: "/stock-dashboard",
+    element: <StockDashboard />,
+  },
+  {
+    path: "/stock/add-product",
+    element: <AddProduct />,
+  },
+  {
+    path: "/stock/view-all-products",
+    element: <ViewAllProducts />,
   },
 ]);
 
