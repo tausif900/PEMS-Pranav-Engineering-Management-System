@@ -149,10 +149,10 @@ const AddProduct = () => {
             </div>
 
             <div>
-              <label style={labelStyle}> ₹ Purchase Price / product</label>
+              <label style={labelStyle}>Purchase Price / Product</label>
               <input
                 type="text"
-                placeholder="Enter purchase price"
+                placeholder="Enter purchase price..."
                 style={inputStyle}
                 {...register("purchasePrice")}
               />
@@ -172,7 +172,7 @@ const AddProduct = () => {
               <label style={labelStyle}>Supplier</label>
               <input
                 type="text"
-                placeholder="Enter supplier name"
+                placeholder="Enter supplier name..."
                 style={inputStyle}
                 {...register("supplier")}
               />

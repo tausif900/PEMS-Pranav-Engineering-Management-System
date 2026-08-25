@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { api } from "../../api";
 
 const ViewAllProducts = () => {
+  const [products, setProducts] = useState([]);
+
+  const getAllProducts = async () => {
+    try {
+      const response = await api.get("/products");
+      console.log(response.data);
+      setProducts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
+
   return (
     <div
       style={{
@@ -124,141 +141,62 @@ const ViewAllProducts = () => {
               fontSize: "14px",
             }}
           />
-
-          <select
-            style={{
-              width: "180px",
-              padding: "13px",
-              borderRadius: "8px",
-              border: "1px solid #8f6b2f",
-              background: "#4b3007",
-              color: "#fff5dc",
-              outline: "none",
-            }}
-          >
-            <option>All Locations</option>
-            <option>Rack A-01</option>
-            <option>Rack A-02</option>
-            <option>Rack B-01</option>
-          </select>
         </div>
 
         {/* Table */}
-        <div
-          style={{
-            overflowX: "auto",
-            borderRadius: "10px",
-            border: "1px solid rgba(180, 137, 62, 0.35)",
-          }}
-        >
-          <table
+        {products.length > 0 ? (
+          <div
             style={{
-              width: "100%",
-              borderCollapse: "collapse",
-              minWidth: "1100px",
+              overflowX: "auto",
+              borderRadius: "10px",
+              border: "1px solid rgba(180, 137, 62, 0.35)",
             }}
           >
-            <thead>
-              <tr style={{ background: "rgba(110, 72, 13, 0.95)" }}>
-                <th style={thStyle}>Product Name</th>
-                <th style={thStyle}>Code</th>
-                <th style={thStyle}>Quantity</th>
-                <th style={thStyle}>Purchase Price</th>
-                <th style={thStyle}>Selling Price</th>
-                <th style={thStyle}>Location</th>
-                <th style={thStyle}>Supplier</th>
-              </tr>
-            </thead>
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                minWidth: "1100px",
+              }}
+            >
+              <thead>
+                <tr style={{ background: "rgba(110, 72, 13, 0.95)" }}>
+                  <th style={thStyle}>Product Name</th>
+                  <th style={thStyle}>Code</th>
+                  <th style={thStyle}>Quantity</th>
+                  <th style={thStyle}>Purchase Price</th>
+                  <th style={thStyle}>Selling Price</th>
+                  <th style={thStyle}>Location</th>
+                  <th style={thStyle}>Supplier</th>
+                  <th style={thStyle}>Delivery Date</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr style={rowStyle}>
-                <td style={tdStyle}>
-                  <strong>Oil Filter</strong>
-                </td>
-                <td style={tdStyle}>OF-101</td>
-                <td style={tdStyle}>
-                  <span style={quantityBadge}>125</span>
-                </td>
-                <td style={tdStyle}>₹450</td>
-                <td style={tdStyle}>₹650</td>
-                <td style={tdStyle}>Rack A-01</td>
-                <td style={tdStyle}>ABC Auto Parts</td>
-              </tr>
-
-              <tr style={rowStyle}>
-                <td style={tdStyle}>
-                  <strong>Air Filter</strong>
-                </td>
-                <td style={tdStyle}>AF-205</td>
-                <td style={tdStyle}>
-                  <span style={quantityBadge}>85</span>
-                </td>
-                <td style={tdStyle}>₹550</td>
-                <td style={tdStyle}>₹800</td>
-                <td style={tdStyle}>Rack A-02</td>
-                <td style={tdStyle}>XYZ Filters</td>
-              </tr>
-
-              <tr style={rowStyle}>
-                <td style={tdStyle}>
-                  <strong>Compressor Part</strong>
-                </td>
-                <td style={tdStyle}>CP-310</td>
-                <td style={tdStyle}>
-                  <span
-                    style={{
-                      ...quantityBadge,
-                      background: "rgba(180, 120, 20, 0.25)",
-                      color: "#ffd77d",
-                    }}
-                  >
-                    42
-                  </span>
-                </td>
-                <td style={tdStyle}>₹1,250</td>
-                <td style={tdStyle}>₹1,650</td>
-                <td style={tdStyle}>Rack B-01</td>
-                <td style={tdStyle}>Global Compressor</td>
-              </tr>
-
-              <tr style={rowStyle}>
-                <td style={tdStyle}>
-                  <strong>Hydraulic Filter</strong>
-                </td>
-                <td style={tdStyle}>HF-410</td>
-                <td style={tdStyle}>
-                  <span style={quantityBadge}>210</span>
-                </td>
-                <td style={tdStyle}>₹700</td>
-                <td style={tdStyle}>₹950</td>
-                <td style={tdStyle}>Rack B-02</td>
-                <td style={tdStyle}>Prime Filters</td>
-              </tr>
-
-              <tr>
-                <td style={tdStyle}>
-                  <strong>Fuel Filter</strong>
-                </td>
-                <td style={tdStyle}>FF-520</td>
-                <td style={tdStyle}>
-                  <span
-                    style={{
-                      ...quantityBadge,
-                      background: "rgba(180, 55, 30, 0.25)",
-                      color: "#ffb49c",
-                    }}
-                  >
-                    18
-                  </span>
-                </td>
-                <td style={tdStyle}>₹350</td>
-                <td style={tdStyle}>₹520</td>
-                <td style={tdStyle}>Rack C-01</td>
-                <td style={tdStyle}>Auto Filter Co.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              <tbody>
+                {products.map((p) => {
+                  return (
+                    <tr style={rowStyle} key={p.productId}>
+                      <td style={tdStyle}>
+                        <strong>{p.productName}</strong>
+                      </td>
+                      <td style={tdStyle}>{p.productCode}</td>
+                      <td style={tdStyle}>
+                        <span style={quantityBadge}>{p.quantity}</span>
+                      </td>
+                      <td style={tdStyle}>₹ {p.purchasePrice}</td>
+                      <td style={tdStyle}>₹ {p.sellingPrice}</td>
+                      <td style={tdStyle}>{p.productLocation}</td>
+                      <td style={tdStyle}>{p.supplier}</td>
+                      <td style={tdStyle}>{p.deliveryDate}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="text-center">No Products Found</div>
+        )}
 
         {/* Bottom */}
         <div
