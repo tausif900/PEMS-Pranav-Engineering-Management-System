@@ -74,40 +74,6 @@ const ViewAllProducts = () => {
         </button>
       </div>
 
-      {/* Summary Cards */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "18px",
-          marginBottom: "25px",
-        }}
-      >
-        <div style={summaryCard}>
-          <span style={iconStyle}>📦</span>
-          <div>
-            <p style={summaryTitle}>Total Products</p>
-            <h2 style={summaryValue}>48</h2>
-          </div>
-        </div>
-
-        <div style={summaryCard}>
-          <span style={iconStyle}>📊</span>
-          <div>
-            <p style={summaryTitle}>Total Quantity</p>
-            <h2 style={summaryValue}>1,245</h2>
-          </div>
-        </div>
-
-        <div style={summaryCard}>
-          <span style={iconStyle}>💰</span>
-          <div>
-            <p style={summaryTitle}>Stock Value</p>
-            <h2 style={summaryValue}>₹8.45L</h2>
-          </div>
-        </div>
-      </div>
-
       {/* Products Container */}
       <div
         style={{
@@ -238,38 +204,7 @@ const ViewAllProducts = () => {
   );
 };
 
-const summaryCard = {
-  background: "rgba(83, 54, 10, 0.92)",
-  border: "1px solid rgba(180, 137, 62, 0.45)",
-  borderRadius: "14px",
-  padding: "20px",
-  display: "flex",
-  alignItems: "center",
-  gap: "15px",
-};
 
-const iconStyle = {
-  width: "48px",
-  height: "48px",
-  borderRadius: "10px",
-  background: "rgba(194, 140, 44, 0.2)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: "22px",
-};
-
-const summaryTitle = {
-  margin: 0,
-  color: "#cdb98d",
-  fontSize: "13px",
-};
-
-const summaryValue = {
-  margin: "5px 0 0",
-  color: "#ffe5a8",
-  fontSize: "24px",
-};
 
 const thStyle = {
   padding: "15px 14px",

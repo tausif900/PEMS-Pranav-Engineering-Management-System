@@ -3,6 +3,19 @@ import { useNavigate } from "react-router-dom";
 
 const StockDashboard = () => {
   const navigate = useNavigate();
+
+  const todaysDate = () => {
+    const date = new Date();
+    const d = date.toDateString();
+    return d;
+  };
+
+  const currentTime = () => {
+    const now = new Date();
+    const t = now.toLocaleTimeString();
+    return t;
+  };
+
   return (
     <div
       style={{
@@ -55,12 +68,47 @@ const StockDashboard = () => {
             padding: "12px 20px",
             borderRadius: "30px",
             boxShadow: "0 4px 15px rgba(30,60,100,0.08)",
-            color: "#536176",
-            fontSize: "13px",
+            color: "#353b43",
+            fontSize: "15px",
           }}
         >
           <i className="bi bi-calendar3 me-2"></i>
-          24 Aug 2026 | 01:30 PM
+          {/* 24 Aug 2026 | 01:30 PM */}
+          {todaysDate()} | {currentTime()}
+        </div>
+      </div>
+
+      {/* Summary Cards */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "18px",
+          marginBottom: "25px",
+        }}
+      >
+        <div style={summaryCard}>
+          <span style={iconStyle}>📦</span>
+          <div>
+            <p style={summaryTitle}>Total Products</p>
+            <h2 style={summaryValue}>48</h2>
+          </div>
+        </div>
+
+        <div style={summaryCard}>
+          <span style={iconStyle}>📊</span>
+          <div>
+            <p style={summaryTitle}>Total Quantity</p>
+            <h2 style={summaryValue}>1,245</h2>
+          </div>
+        </div>
+
+        <div style={summaryCard}>
+          <span style={iconStyle}>💰</span>
+          <div>
+            <p style={summaryTitle}>Stock Value</p>
+            <h2 style={summaryValue}>₹8.45L</h2>
+          </div>
         </div>
       </div>
 
@@ -226,144 +274,44 @@ const StockDashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* PRODUCTS OVERVIEW */}
-
-      <div
-        style={{
-          background: "linear-gradient(135deg, #fff7ed, #fde68a)",
-          borderRadius: "18px",
-          padding: "28px",
-          boxShadow: "0 7px 22px rgba(30,60,100,0.08)",
-        }}
-      >
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <div className="d-flex align-items-center">
-            <div
-              className="d-flex align-items-center justify-content-center me-3"
-              style={{
-                width: "42px",
-                height: "42px",
-                borderRadius: "10px",
-                backgroundColor: "#edf3ff",
-                color: "#d97706",
-                fontSize: "19px",
-              }}
-            >
-              <i className="bi bi-box-seam"></i>
-            </div>
-
-            <div>
-              <h4
-                style={{
-                  margin: 0,
-                  color: "#111d3a",
-                  fontSize: "20px",
-                  fontWeight: "700",
-                }}
-              >
-                Products Overview
-              </h4>
-
-              <span
-                style={{
-                  color: "#7a879a",
-                  fontSize: "12px",
-                }}
-              >
-                Recently added or updated products
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* TABLE */}
-
-        <div className="table-responsive">
-          <table className="table align-middle mb-0">
-            <thead>
-              <tr
-                style={{
-                  color: "#66748a",
-                  fontSize: "12px",
-                  borderBottom: "1px solid #e8edf4",
-                }}
-              >
-                <th style={{ padding: "14px" }}>PRODUCT CODE</th>
-                <th>PRODUCT NAME</th>
-                <th>CATEGORY</th>
-                <th>QUANTITY</th>
-                <th>UNIT</th>
-                <th>UNIT PRICE (₹)</th>
-                <th>STATUS</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td
-                  style={{
-                    padding: "18px 14px",
-                    color: "#1769d5",
-                    fontWeight: "600",
-                    fontSize: "13px",
-                  }}
-                >
-                  PRD001
-                </td>
-
-                <td style={{ fontSize: "13px", fontWeight: "600" }}>
-                  Oil Filter
-                </td>
-
-                <td style={{ fontSize: "13px", color: "#536176" }}>Filters</td>
-
-                <td
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    color: "#159957",
-                  }}
-                >
-                  120
-                </td>
-
-                <td style={{ fontSize: "13px", color: "#536176" }}>PCS</td>
-
-                <td style={{ fontSize: "13px", fontWeight: "600" }}>350.00</td>
-
-                <td>
-                  <span
-                    style={{
-                      backgroundColor: "#e5f7ed",
-                      color: "#159957",
-                      padding: "6px 12px",
-                      borderRadius: "20px",
-                      fontSize: "11px",
-                      fontWeight: "600",
-                    }}
-                  >
-                    In Stock
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div
-          className="text-center"
-          style={{
-            marginTop: "22px",
-            color: "#68758b",
-            fontSize: "13px",
-          }}
-        >
-          Showing 5 of 25 products
-        </div>
-      </div>
     </div>
   );
 };
 
 export default StockDashboard;
+
+const summaryCard = {
+  background: "linear-gradient(135deg, #fff7ed, #fed7aa)",
+  border: "1px solid #d3e3ff",
+  borderRadius: "18px",
+  padding: "32px",
+  cursor: "pointer",
+  boxShadow: "0 7px 22px rgba(35,100,200,0.08)",
+  padding: "20px",
+  display: "flex",
+  alignItems: "center",
+  gap: "15px",
+};
+
+const iconStyle = {
+  width: "48px",
+  height: "48px",
+  borderRadius: "10px",
+  background: "rgba(205, 161, 85, 0.2)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "22px",
+};
+
+const summaryTitle = {
+  margin: 0,
+  color: "#696253",
+  fontSize: "15px",
+};
+
+const summaryValue = {
+  margin: "5px 0 0",
+  color: "#45433d",
+  fontSize: "25px",
+};
