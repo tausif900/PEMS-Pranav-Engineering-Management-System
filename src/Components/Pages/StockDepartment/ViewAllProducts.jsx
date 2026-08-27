@@ -3,15 +3,27 @@ import { api } from "../../api";
 
 const ViewAllProducts = () => {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filteredProduct, setfilteredProduct] = useState([]);
 
   const getAllProducts = async () => {
     try {
       const response = await api.get("/products");
       console.log(response.data);
       setProducts(response.data);
+      setfilteredProduct(response.data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getFilteredProducts = (name) => {
+    console.log(name);
+    const filterProduct = products.filter((p) =>
+      p.productName.toLowerCase().includes(name.toLowerCase()),
+    );
+    console.log(filterProduct);
+    setfilteredProduct(filterProduct);
   };
 
   useEffect(() => {
@@ -106,11 +118,16 @@ const ViewAllProducts = () => {
               color: "#fff5dc",
               fontSize: "14px",
             }}
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              getFilteredProducts(e.target.value);
+            }}
           />
         </div>
 
         {/* Table */}
-        {products.length > 0 ? (
+        {filteredProduct.length > 0 ? (
           <div
             style={{
               overflowX: "auto",
@@ -130,16 +147,18 @@ const ViewAllProducts = () => {
                   <th style={thStyle}>Product Name</th>
                   <th style={thStyle}>Code</th>
                   <th style={thStyle}>Quantity</th>
+                  <th style={thStyle}>Status</th>
                   <th style={thStyle}>Purchase Price</th>
                   <th style={thStyle}>Selling Price</th>
                   <th style={thStyle}>Location</th>
                   <th style={thStyle}>Supplier</th>
                   <th style={thStyle}>Delivery Date</th>
+                  <th style={thStyle}>Action</th>
                 </tr>
               </thead>
 
               <tbody>
-                {products.map((p) => {
+                {filteredProduct.map((p) => {
                   return (
                     <tr style={rowStyle} key={p.productId}>
                       <td style={tdStyle}>
@@ -149,11 +168,37 @@ const ViewAllProducts = () => {
                       <td style={tdStyle}>
                         <span style={quantityBadge}>{p.quantity}</span>
                       </td>
+                      <td style={tdStyle}>
+                        {p.quantity === 0 ? (
+                          <span className="badge bg-danger rounded-pill px-3 py-2">
+                            Out of Stock
+                          </span>
+                        ) : p.quantity <= 20 ? (
+                          <span className="badge bg-warning text-dark rounded-pill px-3 py-2">
+                            Low Stock
+                          </span>
+                        ) : (
+                          <span className="badge bg-success rounded-pill px-3 py-2">
+                            In Stock
+                          </span>
+                        )}
+                      </td>
                       <td style={tdStyle}>₹ {p.purchasePrice}</td>
                       <td style={tdStyle}>₹ {p.sellingPrice}</td>
                       <td style={tdStyle}>{p.productLocation}</td>
                       <td style={tdStyle}>{p.supplier}</td>
                       <td style={tdStyle}>{p.deliveryDate}</td>
+                      <td style={tdStyle}>
+                        {p.quantity <= 20 ? (
+                          <button className="btn btn-danger">
+                            Request Purchase
+                          </button>
+                        ) : (
+                          <span className="badge bg-success rounded-pill px-5 py-2 fs-6">
+                            In Stock
+                          </span>
+                        )}
+                      </td>
                     </tr>
                   );
                 })}
@@ -163,48 +208,10 @@ const ViewAllProducts = () => {
         ) : (
           <div className="text-center">No Products Found</div>
         )}
-
-        {/* Bottom */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: "20px",
-          }}
-        >
-          <p
-            style={{
-              margin: 0,
-              color: "#cdb98d",
-              fontSize: "13px",
-            }}
-          >
-            Showing 5 of 48 products
-          </p>
-
-          <div style={{ display: "flex", gap: "8px" }}>
-            <button style={pageButton}>‹</button>
-            <button
-              style={{
-                ...pageButton,
-                background: "#a97825",
-                color: "#fff8e7",
-              }}
-            >
-              1
-            </button>
-            <button style={pageButton}>2</button>
-            <button style={pageButton}>3</button>
-            <button style={pageButton}>›</button>
-          </div>
-        </div>
       </div>
     </div>
   );
 };
-
-
 
 const thStyle = {
   padding: "15px 14px",
@@ -218,7 +225,7 @@ const thStyle = {
 const tdStyle = {
   padding: "16px 14px",
   color: "#e6d4ae",
-  fontSize: "13px",
+  fontSize: "15px",
   borderBottom: "1px solid rgba(190, 150, 75, 0.18)",
 };
 

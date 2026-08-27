@@ -12,7 +12,11 @@ const StockDashboard = () => {
 
   const currentTime = () => {
     const now = new Date();
-    const t = now.toLocaleTimeString();
+    const t = now.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
     return t;
   };
 
