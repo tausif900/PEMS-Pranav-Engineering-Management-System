@@ -23,6 +23,7 @@ import AddDepartment from "./Components/Pages/AdminDepartment/AddDepartment";
 import StockDashboard from "./Components/Pages/StockDepartment/StockDashboard";
 import AddProduct from "./Components/Pages/StockDepartment/AddProduct";
 import ViewAllProducts from "./Components/Pages/StockDepartment/ViewAllProducts";
+import StockOverview from "./Components/Pages/StockDepartment/StockOverview";
 
 const router = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
   {
     path: "/stock/view-all-products",
     element: <ViewAllProducts />,
+  },
+  {
+    path: "/stock/stock-overview",
+    element: <StockOverview />,
   },
 ]);
 

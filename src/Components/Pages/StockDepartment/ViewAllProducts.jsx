@@ -147,13 +147,11 @@ const ViewAllProducts = () => {
                   <th style={thStyle}>Product Name</th>
                   <th style={thStyle}>Code</th>
                   <th style={thStyle}>Quantity</th>
-                  <th style={thStyle}>Status</th>
                   <th style={thStyle}>Purchase Price</th>
                   <th style={thStyle}>Selling Price</th>
                   <th style={thStyle}>Location</th>
                   <th style={thStyle}>Supplier</th>
                   <th style={thStyle}>Delivery Date</th>
-                  <th style={thStyle}>Action</th>
                 </tr>
               </thead>
 
@@ -168,37 +166,12 @@ const ViewAllProducts = () => {
                       <td style={tdStyle}>
                         <span style={quantityBadge}>{p.quantity}</span>
                       </td>
-                      <td style={tdStyle}>
-                        {p.quantity === 0 ? (
-                          <span className="badge bg-danger rounded-pill px-3 py-2">
-                            Out of Stock
-                          </span>
-                        ) : p.quantity <= 20 ? (
-                          <span className="badge bg-warning text-dark rounded-pill px-3 py-2">
-                            Low Stock
-                          </span>
-                        ) : (
-                          <span className="badge bg-success rounded-pill px-3 py-2">
-                            In Stock
-                          </span>
-                        )}
-                      </td>
+
                       <td style={tdStyle}>₹ {p.purchasePrice}</td>
                       <td style={tdStyle}>₹ {p.sellingPrice}</td>
                       <td style={tdStyle}>{p.productLocation}</td>
                       <td style={tdStyle}>{p.supplier}</td>
                       <td style={tdStyle}>{p.deliveryDate}</td>
-                      <td style={tdStyle}>
-                        {p.quantity <= 20 ? (
-                          <button className="btn btn-danger">
-                            Request Purchase
-                          </button>
-                        ) : (
-                          <span className="badge bg-success rounded-pill px-5 py-2 fs-6">
-                            In Stock
-                          </span>
-                        )}
-                      </td>
                     </tr>
                   );
                 })}
@@ -208,6 +181,174 @@ const ViewAllProducts = () => {
         ) : (
           <div className="text-center">No Products Found</div>
         )}
+      </div>
+
+      {/* Request Purchase Modal */}
+
+      <div
+        className="modal fade"
+        id="purchaseRequestModal"
+        tabIndex="-1"
+        aria-labelledby="purchaseRequestModalLabel"
+        aria-hidden="true"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.65)",
+        }}
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div
+            className="modal-content"
+            style={{
+              background: "#53360a",
+              border: "1px solid #9b7432",
+              borderRadius: "15px",
+              color: "#fff5dc",
+            }}
+          >
+            {/* Header */}
+            <div
+              className="modal-header"
+              style={{
+                borderBottom: "1px solid rgba(190, 150, 75, 0.3)",
+              }}
+            >
+              <div>
+                <h5
+                  className="modal-title"
+                  style={{
+                    color: "#ffe5a8",
+                    fontWeight: "600",
+                  }}
+                >
+                  Request Purchase
+                </h5>
+
+                <small style={{ color: "#cdb98d" }}>
+                  Send a purchase request to Purchase Department
+                </small>
+              </div>
+
+              <button
+                type="button"
+                className="btn-close btn-close-white"
+              ></button>
+            </div>
+
+            {/* Body */}
+            <div className="modal-body">
+              {/* Product Name */}
+              <div className="mb-3">
+                <label style={labelStyle}>Product Name</label>
+
+                <input
+                  type="text"
+                  className="form-control"
+                  value="Oil Filter"
+                  readOnly
+                  style={inputStyle}
+                />
+              </div>
+
+              {/* Product Code + Current Quantity */}
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <label style={labelStyle}>Product Code</label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    value="OF-101"
+                    readOnly
+                    style={inputStyle}
+                  />
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label style={labelStyle}>Current Quantity</label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    value="15"
+                    readOnly
+                    style={inputStyle}
+                  />
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="mb-3">
+                <label style={labelStyle}>Product Description</label>
+
+                <input
+                  type="text"
+                  className="form-control"
+                  value="12 x 6 cm"
+                  readOnly
+                  style={inputStyle}
+                />
+              </div>
+
+              {/* Required Quantity */}
+              <div className="mb-3">
+                <label style={labelStyle}>Required Quantity</label>
+
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Enter quantity to purchase"
+                  style={inputStyle}
+                />
+
+                <small
+                  style={{
+                    color: "#cdb98d",
+                    fontSize: "12px",
+                  }}
+                >
+                  Enter the quantity you want to purchase
+                </small>
+              </div>
+
+              {/* Reason */}
+              <div className="mb-2">
+                <label style={labelStyle}>Reason</label>
+
+                <select className="form-select" style={inputStyle}>
+                  <option>Low Stock</option>
+                  <option>Out of Stock</option>
+                  <option>Sales Requirement</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div
+              className="modal-footer"
+              style={{
+                borderTop: "1px solid rgba(190, 150, 75, 0.3)",
+              }}
+            >
+              <button
+                type="button"
+                className="btn"
+                style={{
+                  background: "#a97825",
+                  border: "1px solid #c8953b",
+                  color: "#fff8e7",
+                  fontWeight: "600",
+                }}
+              >
+                Send Request
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -250,6 +391,23 @@ const pageButton = {
   background: "rgba(65, 42, 5, 0.8)",
   color: "#d8c39a",
   cursor: "pointer",
+};
+
+const labelStyle = {
+  display: "block",
+  marginBottom: "7px",
+  color: "#e5cb98",
+  fontSize: "13px",
+  fontWeight: "600",
+};
+
+const inputStyle = {
+  background: "rgba(50, 32, 5, 0.8)",
+  border: "1px solid #8f6b2f",
+  color: "#fff5dc",
+  borderRadius: "7px",
+  padding: "10px 12px",
+  boxShadow: "none",
 };
 
 export default ViewAllProducts;

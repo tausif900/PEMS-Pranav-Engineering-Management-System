@@ -277,6 +277,88 @@ const StockDashboard = () => {
             </div>
           </div>
         </div>
+
+        {/* Stock Overview */}
+        <div className="col-lg-6">
+          <div
+            style={{
+              background: "linear-gradient(135deg, #fff8e7, #f3dfb0)",
+              border: "1px solid #d8bd7a",
+              borderRadius: "18px",
+              padding: "32px",
+              boxShadow: "0 7px 22px rgba(101, 67, 15, 0.10)",
+            }}
+          >
+            <div className="d-flex align-items-center">
+              {/* Icon */}
+              <div
+                className="d-flex align-items-center justify-content-center me-4"
+                style={{
+                  width: "78px",
+                  height: "78px",
+                  borderRadius: "50%",
+                  backgroundColor: "#ffffff",
+                  color: "#8a5a0a",
+                  fontSize: "31px",
+                  boxShadow: "0 5px 15px rgba(101, 67, 15, 0.12)",
+                }}
+              >
+                <i className="bi bi-boxes"></i>
+              </div>
+
+              {/* Content */}
+              <div style={{ flex: 1 }}>
+                <h3
+                  style={{
+                    margin: "0 0 8px",
+                    color: "#4b3208",
+                    fontSize: "23px",
+                    fontWeight: "700",
+                  }}
+                >
+                  Stock Overview
+                </h3>
+
+                <p
+                  style={{
+                    margin: "0 0 18px",
+                    color: "#725b32",
+                    fontSize: "14px",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  View available products, stock status and request purchase for
+                  low stock items.
+                </p>
+
+                <button
+                  className="btn"
+                  onClick={() => navigate("/stock/stock-overview")}
+                  style={{
+                    backgroundColor: "#8a5a0a",
+                    color: "#ffffff",
+                    borderRadius: "8px",
+                    padding: "9px 17px",
+                    fontSize: "13px",
+                    fontWeight: "600",
+                  }}
+                >
+                  View Stock
+                  <i className="bi bi-arrow-right ms-2"></i>
+                </button>
+              </div>
+
+              {/* Arrow */}
+              <i
+                className="bi bi-chevron-right"
+                style={{
+                  fontSize: "24px",
+                  color: "#8a5a0a",
+                }}
+              ></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
