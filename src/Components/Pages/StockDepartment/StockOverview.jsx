@@ -7,7 +7,7 @@ const StockOverview = () => {
   const [filteredProducts, setfilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState({});
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
   const getAll = () => {
     setfilteredProducts(distinctProducts);
@@ -46,6 +46,13 @@ const StockOverview = () => {
 
   const purchaseRequest = async (data) => {
     console.log(data);
+    try {
+      const response = await api.post("/purchase-request", data);
+      console.log(response.data);
+      alert("Request send successfully");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -254,7 +261,13 @@ const StockOverview = () => {
                         padding: "10px",
                         fontWeight: "600",
                       }}
-                      onClick={() => setSelectedProduct(dp)}
+                      onClick={() => {
+                        setSelectedProduct(dp);
+                        setValue("productName", dp.productName);
+                        setValue("productCode", dp.productCode);
+                        setValue("productDescription", dp.productDescription);
+                        setValue("currentQuantity", dp.quantity);
+                      }}
                     >
                       <i className="bi bi-cart-plus me-2"></i>
                       Request Purchase
