@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../../api";
+import { useForm } from "react-hook-form";
 
 const StockOverview = () => {
   const [distinctProducts, setDistinctProducts] = useState([]);
   const [filteredProducts, setfilteredProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState({});
+
+  const { register, handleSubmit } = useForm();
 
   const getAll = () => {
     setfilteredProducts(distinctProducts);
@@ -38,6 +42,10 @@ const StockOverview = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const purchaseRequest = async (data) => {
+    console.log(data);
   };
 
   useEffect(() => {
@@ -237,6 +245,8 @@ const StockOverview = () => {
                   {dp.quantity === 0 || dp.quantity <= 20 ? (
                     <button
                       className="btn w-100"
+                      data-bs-toggle="modal"
+                      data-bs-target="#purchaseRequestModal"
                       style={{
                         backgroundColor: "#8a5a0a",
                         color: "#ffffff",
@@ -244,6 +254,7 @@ const StockOverview = () => {
                         padding: "10px",
                         fontWeight: "600",
                       }}
+                      onClick={() => setSelectedProduct(dp)}
                     >
                       <i className="bi bi-cart-plus me-2"></i>
                       Request Purchase
@@ -299,8 +310,203 @@ const StockOverview = () => {
           <p style={{ margin: 0 }}>No products found in this category.</p>
         </div>
       )}
+
+      {/* Request Purchase Modal */}
+
+      <form
+        className="modal fade"
+        id="purchaseRequestModal"
+        tabIndex="-1"
+        aria-labelledby="purchaseRequestModalLabel"
+        aria-hidden="true"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.65)",
+        }}
+        onSubmit={handleSubmit(purchaseRequest)}
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div
+            className="modal-content"
+            style={{
+              background: "#53360a",
+              border: "1px solid #9b7432",
+              borderRadius: "15px",
+              color: "#fff5dc",
+            }}
+          >
+            {/* Header */}
+            <div
+              className="modal-header"
+              style={{
+                borderBottom: "1px solid rgba(190, 150, 75, 0.3)",
+              }}
+            >
+              <div>
+                <h5
+                  className="modal-title"
+                  style={{
+                    color: "#ffe5a8",
+                    fontWeight: "600",
+                  }}
+                >
+                  Request Purchase
+                </h5>
+
+                <small style={{ color: "#cdb98d" }}>
+                  Send a purchase request to Purchase Department
+                </small>
+              </div>
+
+              <button
+                type="button"
+                className="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            {/* Body */}
+            <div className="modal-body">
+              {/* Product Name */}
+              <div className="mb-3">
+                <label style={labelStyle}>Product Name</label>
+
+                <input
+                  type="text"
+                  className="form-control"
+                  value={selectedProduct?.productName}
+                  readOnly
+                  style={inputStyle}
+                  {...register("productName")}
+                />
+              </div>
+
+              {/* Product Code + Current Quantity */}
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <label style={labelStyle}>Product Code</label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={selectedProduct?.productCode}
+                    readOnly
+                    style={inputStyle}
+                    {...register("productCode")}
+                  />
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label style={labelStyle}>Current Quantity</label>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={selectedProduct?.quantity}
+                    readOnly
+                    style={inputStyle}
+                    {...register("currentQuantity")}
+                  />
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="mb-3">
+                <label style={labelStyle}>Product Description</label>
+
+                <input
+                  type="text"
+                  className="form-control"
+                  value={selectedProduct?.productDescription}
+                  readOnly
+                  style={inputStyle}
+                  {...register("productDescription")}
+                />
+              </div>
+
+              {/* Required Quantity */}
+              <div className="mb-3">
+                <label style={labelStyle}>Required Quantity</label>
+
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter quantity to purchase..."
+                  style={inputStyle}
+                  {...register("requestedQuantity")}
+                />
+
+                <small
+                  style={{
+                    color: "#cdb98d",
+                    fontSize: "12px",
+                  }}
+                >
+                  Enter the quantity you want to purchase
+                </small>
+              </div>
+
+              {/* Reason */}
+              <div className="mb-2">
+                <label style={labelStyle}>Reason</label>
+
+                <select
+                  className="form-select"
+                  style={inputStyle}
+                  {...register("reason")}
+                >
+                  <option>Low Stock</option>
+                  <option>Out of Stock</option>
+                  <option>Sales Requirement</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div
+              className="modal-footer"
+              style={{
+                borderTop: "1px solid rgba(190, 150, 75, 0.3)",
+              }}
+            >
+              <button
+                type="submit"
+                className="btn"
+                style={{
+                  background: "#a97825",
+                  border: "1px solid #c8953b",
+                  color: "#fff8e7",
+                  fontWeight: "600",
+                }}
+              >
+                Send Request
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };
 
 export default StockOverview;
+
+const labelStyle = {
+  display: "block",
+  marginBottom: "7px",
+  color: "#e5cb98",
+  fontSize: "15px",
+  fontWeight: "600",
+};
+
+const inputStyle = {
+  background: "rgba(50, 32, 5, 0.8)",
+  border: "1px solid #8f6b2f",
+  color: "#fff5dc",
+  borderRadius: "7px",
+  padding: "10px 12px",
+  boxShadow: "none",
+};
