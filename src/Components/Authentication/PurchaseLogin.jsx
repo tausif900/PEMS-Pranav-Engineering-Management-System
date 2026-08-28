@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const PurchaseLogin = () => {
+  const navigate = useNavigate();
   return (
     <div
       className="min-vh-100 d-flex align-items-center justify-content-center"
@@ -254,6 +256,7 @@ const PurchaseLogin = () => {
               fontSize: "15px",
               fontWeight: "600",
             }}
+            onClick={() => navigate("/purchase-dashboard")}
           >
             Login In
             <i className="bi bi-arrow-right ms-2"></i>
