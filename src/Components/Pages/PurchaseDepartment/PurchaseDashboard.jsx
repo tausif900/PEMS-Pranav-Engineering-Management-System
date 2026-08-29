@@ -373,7 +373,6 @@ const PurchaseDashboard = () => {
               border: "1px solid #e8c18f",
               borderRadius: "18px",
               padding: "30px",
-              cursor: "pointer",
               boxShadow: "0 7px 22px rgba(107,50,5,0.10)",
             }}
           >
@@ -419,8 +418,9 @@ const PurchaseDashboard = () => {
                 padding: "9px 18px",
                 fontWeight: "600",
               }}
+              onClick={() => navigate("/purchase/create-PO")}
             >
-              View Orders
+              Create Purchase Orders
               <i className="bi bi-arrow-right ms-2"></i>
             </button>
           </div>

@@ -26,7 +26,7 @@ const ViewAllSuppliers = () => {
         <div className="d-flex gap-2">
           <button
             className="btn"
-            onClick={() => navigate("/add-supplier")}
+            onClick={() => navigate("/purchase/add-supplier")}
             style={{
               backgroundColor: "#ff8500",
               color: "#fff",

@@ -27,6 +27,9 @@ import StockOverview from "./Components/Pages/StockDepartment/StockOverview";
 import PurchaseDashboard from "./Components/Pages/PurchaseDepartment/PurchaseDashboard";
 import ViewAllPurchaseRequest from "./Components/Pages/PurchaseDepartment/ViewAllPurchaseRequest";
 import ViewAllSuppliers from "./Components/Pages/PurchaseDepartment/ViewAllSuppliers";
+import AddSupplier from "./Components/Pages/PurchaseDepartment/AddSupplier";
+import CreatePO from "./Components/Pages/PurchaseDepartment/CreatePO";
+import POPreview from "./Components/Pages/PurchaseDepartment/POPreview";
 
 const router = createBrowserRouter([
   {
@@ -136,6 +139,18 @@ const router = createBrowserRouter([
   {
     path: "/purchase/suppliers",
     element: <ViewAllSuppliers />,
+  },
+  {
+    path: "/purchase/add-supplier",
+    element: <AddSupplier />,
+  },
+  {
+    path: "/purchase/create-PO",
+    element: <CreatePO />,
+  },
+   {
+    path: "/purchase-preview",
+    element: <POPreview/>
   },
 ]);
 
