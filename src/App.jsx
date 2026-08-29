@@ -30,6 +30,8 @@ import ViewAllSuppliers from "./Components/Pages/PurchaseDepartment/ViewAllSuppl
 import AddSupplier from "./Components/Pages/PurchaseDepartment/AddSupplier";
 import CreatePO from "./Components/Pages/PurchaseDepartment/CreatePO";
 import POPreview from "./Components/Pages/PurchaseDepartment/POPreview";
+import ViewOpenPO from "./Components/Pages/PurchaseDepartment/ViewOpenPO";
+import ReceiveMaterialForm from "./Components/Pages/PurchaseDepartment/ReceiveMaterialForm";
 
 const router = createBrowserRouter([
   {
@@ -148,9 +150,17 @@ const router = createBrowserRouter([
     path: "/purchase/create-PO",
     element: <CreatePO />,
   },
-   {
+  {
     path: "/purchase-preview",
-    element: <POPreview/>
+    element: <POPreview />,
+  },
+  {
+    path: "/open-PO",
+    element: <ViewOpenPO />,
+  },
+  {
+    path: "/fill-receive-material-form",
+    element: <ReceiveMaterialForm/>
   },
 ]);
 

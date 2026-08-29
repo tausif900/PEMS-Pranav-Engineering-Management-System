@@ -425,16 +425,129 @@ const PurchaseDashboard = () => {
             </button>
           </div>
         </div>
-        {/* Received Materials */}
+        {/*Open Purchase Orders */}
         <div className="col-lg-4">
           <div
-            onClick={() => navigate("/received-materials")}
+            style={{
+              background: "linear-gradient(135deg, #fffaf2, #f5d8ad)",
+              border: "1px solid #e8c18f",
+              borderRadius: "18px",
+              padding: "30px",
+              boxShadow: "0 7px 22px rgba(107,50,5,0.10)",
+            }}
+          >
+            <div
+              className="d-flex align-items-center justify-content-center mb-3"
+              style={{
+                width: "65px",
+                height: "65px",
+                borderRadius: "16px",
+                backgroundColor: "#f08a24",
+                color: "#fff",
+                fontSize: "28px",
+              }}
+            >
+              <i className="bi bi-file-earmark-text"></i>
+            </div>
+
+            <h4
+              style={{
+                color: "#6b3205",
+                fontWeight: "700",
+              }}
+            >
+              Open PO
+            </h4>
+
+            <p
+              style={{
+                color: "#8a5a2b",
+                fontSize: "14px",
+                lineHeight: "1.6",
+              }}
+            >
+              View Open PO and close when the material received
+            </p>
+
+            <button
+              className="btn"
+              style={{
+                backgroundColor: "#8a4b08",
+                color: "#fff",
+                borderRadius: "8px",
+                padding: "9px 18px",
+                fontWeight: "600",
+              }}
+              onClick={() => navigate("/open-PO")}
+            >
+              View Open PO
+              <i className="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+        {/* Receive Materials */}
+        <div className="col-lg-4">
+          <div
             style={{
               background: "linear-gradient(135deg, #fffaf2, #ffe1b8)",
               border: "1px solid #e8c18f",
               borderRadius: "18px",
               padding: "30px",
-              cursor: "pointer",
+              boxShadow: "0 7px 22px rgba(107,50,5,0.10)",
+            }}
+          >
+            <div
+              className="d-flex align-items-center justify-content-center mb-3"
+              style={{
+                width: "65px",
+                height: "65px",
+                borderRadius: "16px",
+                backgroundColor: "#ff8500",
+                color: "#fff",
+                fontSize: "28px",
+              }}
+            >
+              <i className="bi bi-box-seam"></i>
+            </div>
+
+            <h4 style={{ color: "#6b3205", fontWeight: "700" }}>
+              Enter Receive Materials
+            </h4>
+
+            <p
+              style={{
+                color: "#8a5a2b",
+                fontSize: "14px",
+                lineHeight: "1.6",
+              }}
+            >
+              Fill the Form with the receive materials details and manage.
+            </p>
+
+            <button
+              className="btn"
+              onClick={() => navigate("/fill-receive-material-form")}
+              style={{
+                backgroundColor: "#8a4b08",
+                color: "#fff",
+                borderRadius: "8px",
+                padding: "9px 18px",
+                fontWeight: "600",
+              }}
+            >
+              Fill Form
+              <i className="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+        {/* Received Materials */}
+        <div className="col-lg-4">
+          <div
+            style={{
+              background: "linear-gradient(135deg, #fffaf2, #ffe1b8)",
+              border: "1px solid #e8c18f",
+              borderRadius: "18px",
+              padding: "30px",
               boxShadow: "0 7px 22px rgba(107,50,5,0.10)",
             }}
           >
@@ -468,8 +581,7 @@ const PurchaseDashboard = () => {
 
             <button
               className="btn"
-              onClick={(e) => {
-                e.stopPropagation();
+              onClick={() => {
                 navigate("/received-materials");
               }}
               style={{
