@@ -600,13 +600,11 @@ const PurchaseDashboard = () => {
         {/* Pending Deliveries */}
         <div className="col-lg-4">
           <div
-            onClick={() => navigate("/pending-deliveries")}
             style={{
               background: "linear-gradient(135deg, #fffaf2, #ffe1b8)",
               border: "1px solid #e8c18f",
               borderRadius: "18px",
               padding: "30px",
-              cursor: "pointer",
               boxShadow: "0 7px 22px rgba(107,50,5,0.10)",
             }}
           >
@@ -640,8 +638,7 @@ const PurchaseDashboard = () => {
 
             <button
               className="btn"
-              onClick={(e) => {
-                e.stopPropagation();
+              onClick={() => {
                 navigate("/pending-deliveries");
               }}
               style={{
@@ -660,13 +657,11 @@ const PurchaseDashboard = () => {
         {/* Purchase History */}
         <div className="col-lg-4">
           <div
-            onClick={() => navigate("/purchase-history")}
             style={{
               background: "linear-gradient(135deg, #fffaf2, #ffe1b8)",
               border: "1px solid #e8c18f",
               borderRadius: "18px",
               padding: "30px",
-              cursor: "pointer",
               boxShadow: "0 7px 22px rgba(107,50,5,0.10)",
             }}
           >
@@ -700,10 +695,7 @@ const PurchaseDashboard = () => {
 
             <button
               className="btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                navigate("/purchase-history");
-              }}
+              onClick={() => navigate("/purchase-history")}
               style={{
                 backgroundColor: "#8a4b08",
                 color: "#fff",

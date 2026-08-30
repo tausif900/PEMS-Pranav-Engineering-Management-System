@@ -32,6 +32,9 @@ import CreatePO from "./Components/Pages/PurchaseDepartment/CreatePO";
 import POPreview from "./Components/Pages/PurchaseDepartment/POPreview";
 import ViewOpenPO from "./Components/Pages/PurchaseDepartment/ViewOpenPO";
 import ReceiveMaterialForm from "./Components/Pages/PurchaseDepartment/ReceiveMaterialForm";
+import ReceivedMaterail from "./Components/Pages/PurchaseDepartment/ReceivedMaterail";
+import PendingDeliveries from "./Components/Pages/PurchaseDepartment/PendingDeliveries";
+import PurchaseHistory from "./Components/Pages/PurchaseDepartment/PurchaseHistory";
 
 const router = createBrowserRouter([
   {
@@ -160,7 +163,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/fill-receive-material-form",
-    element: <ReceiveMaterialForm/>
+    element: <ReceiveMaterialForm />,
+  },
+  {
+    path: "/received-materials",
+    element: <ReceivedMaterail />,
+  },
+  {
+    path: "/pending-deliveries",
+    element: <PendingDeliveries />,
+  },
+  {
+    path: "/purchase-history",
+    element: <PurchaseHistory />,
   },
 ]);
 
