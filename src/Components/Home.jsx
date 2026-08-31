@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+
   const departments = [
     {
       name: "Admin",
@@ -62,29 +63,79 @@ const Home = () => {
         position: "relative",
         overflow: "hidden",
 
-        /* FULL SCREEN BACKGROUND IMAGE */
         backgroundImage:
-          "linear-gradient(rgba(5,20,38,0.48), rgba(5,20,38,0.58)), url('/images/ChatGPT Image Aug 15, 2026, 01_43_02 PM.png')",
+          "linear-gradient(rgba(5,20,38,0.62), rgba(5,20,38,0.72)), url('/images/ChatGPT Image Aug 15, 2026, 01_43_02 PM.png')",
 
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* ================= CONTENT ================= */}
+      {/* TOP NAVBAR */}
 
       <div
-        className="container-fluid"
         style={{
-          minHeight: "100vh",
           position: "relative",
           zIndex: 2,
-          padding: "25px 6%",
+          padding: "22px 6%",
         }}
       >
-        {/* ================= HEADER ================= */}
+        <div
+          className="d-flex justify-content-between align-items-center"
+          style={{
+            padding: "13px 20px",
+            borderRadius: "14px",
+            backgroundColor: "rgba(255,255,255,0.10)",
+            border: "1px solid rgba(255,255,255,0.25)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
+        >
+          {/* LOGO */}
 
-        <div className="d-flex justify-content-end align-items-center">
+          <div className="d-flex align-items-center">
+            <div
+              className="d-flex align-items-center justify-content-center"
+              style={{
+                width: "45px",
+                height: "45px",
+                borderRadius: "12px",
+                backgroundColor: "rgba(255,255,255,0.92)",
+                marginRight: "12px",
+              }}
+            >
+              <i
+                className="bi bi-buildings-fill"
+                style={{
+                  color: "#2563eb",
+                  fontSize: "23px",
+                }}
+              ></i>
+            </div>
+
+            <div>
+              <h4
+                style={{
+                  margin: 0,
+                  color: "#ffffff",
+                  fontWeight: "800",
+                  letterSpacing: "1px",
+                }}
+              >
+                PEMS
+              </h4>
+
+              <small
+                style={{
+                  color: "#dbeafe",
+                  fontSize: "11px",
+                }}
+              >
+                Engineering Management System
+              </small>
+            </div>
+          </div>
+
           {/* REGISTER */}
 
           <button
@@ -92,13 +143,14 @@ const Home = () => {
             className="btn"
             style={{
               color: "#ffffff",
-              backgroundColor: "rgba(255,255,255,0.15)",
-              border: "1px solid rgba(255,255,255,0.7)",
-              borderRadius: "7px",
-              padding: "7px 17px",
-              fontSize: "20px",
+              background:
+                "linear-gradient(135deg, rgba(59,130,246,0.9), rgba(37,99,235,0.9))",
+              border: "1px solid rgba(255,255,255,0.4)",
+              borderRadius: "9px",
+              padding: "9px 18px",
+              fontSize: "15px",
               fontWeight: "600",
-              backdropFilter: "blur(8px)",
+              boxShadow: "0 5px 18px rgba(0,0,0,0.20)",
             }}
             onClick={() => navigate("/registration")}
           >
@@ -106,46 +158,103 @@ const Home = () => {
             Register
           </button>
         </div>
+      </div>
 
-        {/* ================= HEADING ================= */}
+      {/* MAIN CONTENT */}
+
+      <div
+        className="container"
+        style={{
+          position: "relative",
+          zIndex: 2,
+          paddingBottom: "35px",
+        }}
+      >
+        {/* HERO SECTION */}
 
         <div
           className="text-center"
           style={{
-            marginTop: "45px",
-            marginBottom: "28px",
+            marginTop: "20px",
+            marginBottom: "35px",
           }}
         >
-          <h1
+          <div
             style={{
-              color: "#cabdbd",
-              fontSize: "36px",
-              fontWeight: "700",
-              marginBottom: "8px",
-              textShadow: "0 3px 12px rgba(0,0,0,0.4)",
+              display: "inline-block",
+              padding: "7px 16px",
+              borderRadius: "30px",
+              backgroundColor: "rgba(255,255,255,0.12)",
+              border: "1px solid rgba(255,255,255,0.25)",
+              color: "#bfdbfe",
+              fontSize: "13px",
+              fontWeight: "600",
+              marginBottom: "15px",
+              backdropFilter: "blur(8px)",
             }}
           >
-            Welcome to PEMS
+            <i className="bi bi-shield-check me-2"></i>
+            Integrated Business Management
+          </div>
+
+          <h1
+            style={{
+              color: "#ffffff",
+              fontSize: "44px",
+              fontWeight: "800",
+              marginBottom: "10px",
+              textShadow: "0 4px 15px rgba(0,0,0,0.5)",
+              letterSpacing: "0.5px",
+            }}
+          >
+            Welcome to <span style={{ color: "#60a5fa" }}>PEMS</span>
           </h1>
 
           <p
             style={{
-              color: "#e5dcdc",
-              fontSize: "20px",
-              margin: "0",
-              opacity: "0.9",
+              color: "#dbeafe",
+              fontSize: "17px",
+              margin: "0 auto",
+              maxWidth: "650px",
+              lineHeight: "1.7",
             }}
           >
-            Select your department to access the management portal
+            A centralized platform to manage every department of your
+            engineering business efficiently and securely.
           </p>
         </div>
 
-        {/* ================= DEPARTMENT CARDS ================= */}
+        {/* DEPARTMENT SECTION */}
+
+        <div className="text-center mb-4">
+          <h5
+            style={{
+              color: "#ffffff",
+              fontWeight: "700",
+              fontSize: "19px",
+              marginBottom: "5px",
+            }}
+          >
+            Choose Your Department
+          </h5>
+
+          <p
+            style={{
+              color: "#cbd5e1",
+              fontSize: "13px",
+              margin: 0,
+            }}
+          >
+            Select a department to continue to the management portal
+          </p>
+        </div>
+
+        {/* DEPARTMENT CARDS */}
 
         <div
-          className="row g-3 justify-content-center"
+          className="row g-4 justify-content-center"
           style={{
-            maxWidth: "900px",
+            maxWidth: "1050px",
             margin: "0 auto",
           }}
         >
@@ -154,24 +263,20 @@ const Home = () => {
               <div
                 className="text-center"
                 style={{
-                  minHeight: "175px",
+                  minHeight: "205px",
+                  padding: "22px 12px",
+                  borderRadius: "18px",
 
-                  /* TRANSPARENT CARD */
+                  backgroundColor: "rgba(255,255,255,0.11)",
 
-                  backgroundColor: "rgba(255,255,255,0.16)",
+                  border: "1px solid rgba(255,255,255,0.25)",
 
-                  border: "1px solid rgba(255,255,255,0.45)",
-
-                  borderRadius: "16px",
-
-                  padding: "20px 10px",
-
-                  /* GLASS EFFECT */
-
-                  backdropFilter: "blur(2px)",
+                  backdropFilter: "blur(10px)",
                   WebkitBackdropFilter: "blur(10px)",
 
-                  boxShadow: "0 8px 30px rgba(0,0,0,0.25)",
+                  boxShadow: "0 10px 35px rgba(0,0,0,0.22)",
+
+                  transition: "all 0.3s ease",
                 }}
               >
                 {/* ICON */}
@@ -179,36 +284,37 @@ const Home = () => {
                 <div
                   className="mx-auto d-flex align-items-center justify-content-center"
                   style={{
-                    width: "60px",
-                    height: "60px",
-                    borderRadius: "50%",
+                    width: "65px",
+                    height: "65px",
+                    borderRadius: "18px",
 
-                    backgroundColor: "rgba(255,255,255,0.85)",
+                    background:
+                      "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.75))",
 
-                    marginBottom: "12px",
+                    marginBottom: "14px",
 
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                    boxShadow: "0 6px 18px rgba(0,0,0,0.18)",
                   }}
                 >
                   <i
                     className={`bi ${department.icon}`}
                     style={{
-                      fontSize: "27px",
+                      fontSize: "29px",
                       color: department.color,
                     }}
                   ></i>
                 </div>
 
-                {/* DEPARTMENT NAME */}
+                {/* NAME */}
 
                 <h5
                   style={{
                     color: "#ffffff",
-                    fontSize: "25px",
+                    fontSize: "19px",
                     fontWeight: "700",
-                    marginBottom: "12px",
+                    marginBottom: "15px",
 
-                    textShadow: "0 2px 5px rgba(0,0,0,0.5)",
+                    textShadow: "0 2px 7px rgba(0,0,0,0.5)",
                   }}
                 >
                   {department.name}
@@ -222,19 +328,21 @@ const Home = () => {
                   style={{
                     color: "#ffffff",
 
-                    backgroundColor: "rgba(255,255,255,0.12)",
+                    backgroundColor: "rgba(255,255,255,0.08)",
 
                     border: `1px solid ${department.color}`,
 
-                    borderRadius: "6px",
+                    borderRadius: "8px",
 
-                    padding: "5px 18px",
+                    padding: "7px 19px",
 
-                    fontSize: "15px",
+                    fontSize: "14px",
 
                     fontWeight: "600",
 
                     backdropFilter: "blur(5px)",
+
+                    boxShadow: `0 3px 12px ${department.color}30`,
                   }}
                   onClick={() => navigate(department.navigate)}
                 >
@@ -246,18 +354,36 @@ const Home = () => {
           ))}
         </div>
 
-        {/* ================= BOTTOM TEXT ================= */}
+        {/* BOTTOM INFO */}
 
         <div
           className="text-center"
           style={{
-            marginTop: "25px",
-            color: "#e0dada",
-            fontSize: "20px",
-            opacity: "0.8",
+            marginTop: "38px",
           }}
         >
-          PEMS Engineering Management System
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "9px 18px",
+              borderRadius: "30px",
+              backgroundColor: "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.18)",
+              color: "#cbd5e1",
+              fontSize: "12px",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <i
+              className="bi bi-lock-fill"
+              style={{
+                color: "#60a5fa",
+              }}
+            ></i>
+            Secure • Centralized • Connected
+          </div>
         </div>
       </div>
     </div>
