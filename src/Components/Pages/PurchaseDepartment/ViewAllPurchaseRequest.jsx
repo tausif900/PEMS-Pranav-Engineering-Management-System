@@ -16,6 +16,22 @@ const ViewAllPurchaseRequest = () => {
     }
   };
 
+  const approvePurchaseRequest = async (purchaseRequestId) => {
+    console.log(purchaseRequestId);
+    try {
+      const response = await api.put(
+        `/purchase-request/approve/${purchaseRequestId}`,
+      );
+      console.log(response.data);
+      alert(
+        "Purchase Request approved successfully. It is now available for PO creation.",
+      );
+      fetchPendingPurchaseRequest();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchPendingPurchaseRequest();
   }, []);
@@ -150,7 +166,7 @@ const ViewAllPurchaseRequest = () => {
               <tbody>
                 {purchaseRequest.map((p) => {
                   return (
-                    <tr>
+                    <tr key={p.requestId}>
                       <td style={{ color: "#8a4b08", fontWeight: "700" }}>
                         <i className="bi bi-box-seam me-2"></i> {p.productName}
                       </td>
@@ -193,7 +209,10 @@ const ViewAllPurchaseRequest = () => {
                         </span>
                       </td>
                       <td className="text-center">
-                        <button className="btn btn-success">
+                        <button
+                          className="btn btn-success"
+                          onClick={() => approvePurchaseRequest(p.requestId)}
+                        >
                           <i className="bi bi-arrow-right-circle me-1"></i>{" "}
                           Approve
                         </button>

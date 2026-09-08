@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../api";
 
 const CreatePO = () => {
+  const [approvedRequests, seAapprovedRequests] = useState([]);
+
+  async function fetchApprovedRequests() {
+    try {
+      const response = await api.get("/purchase-request/approved-requests");
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchApprovedRequests();
+  }, []);
+
   const navigate = useNavigate();
   return (
     <div
