@@ -315,7 +315,7 @@ const CreatePO = () => {
         </div>
       </div>
 
-      {/* Products */}
+      {/* Order Items */}
       <div
         className="mb-4"
         style={{
@@ -346,6 +346,7 @@ const CreatePO = () => {
               borderRadius: "8px",
               fontWeight: "600",
             }}
+            onClick={() => fetchApprovedRequests()}
           >
             <i className="bi bi-plus-lg me-2"></i>
             Add Item
@@ -377,98 +378,98 @@ const CreatePO = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td
-                  style={{
-                    color: "#9a3412",
-                    fontWeight: "700",
-                  }}
-                >
-                  Oil Filter
-                </td>
+              {approvedRequests.map((r) => {
+                return (
+                  <tr>
+                    <td
+                      style={{
+                        color: "#9a3412",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {r.productName}
+                    </td>
 
-                <td
-                  style={{
-                    color: "#2563eb",
-                    fontWeight: "600",
-                  }}
-                >
-                  OF-101
-                </td>
+                    <td
+                      style={{
+                        color: "#2563eb",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {r.productCode}
+                    </td>
 
-                <td>
-                  <input
-                    type="number"
-                    className="form-control"
-                    defaultValue="20"
-                    style={{
-                      width: "90px",
-                      borderColor: "#93c5fd",
-                    }}
-                  />
-                </td>
+                    <td>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={r.requestedQuantity}
+                        style={{
+                          width: "90px",
+                          borderColor: "#93c5fd",
+                        }}
+                      />
+                    </td>
 
-                <td>
-                  <input
-                    type="number"
-                    className="form-control"
-                    placeholder="500"
-                    style={{
-                      width: "110px",
-                      borderColor: "#fdba74",
-                    }}
-                  />
-                </td>
+                    <td>
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Enter unit price..."
+                        style={{
+                          width: "110px",
+                          borderColor: "#fdba74",
+                        }}
+                      />
+                    </td>
 
-                <td>
-                  <input
-                    type="number"
-                    className="form-control"
-                    placeholder="0"
-                    style={{
-                      width: "100px",
-                      borderColor: "#c4b5fd",
-                    }}
-                  />
-                </td>
+                    <td>
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Enter discount price..."
+                        style={{
+                          width: "100px",
+                          borderColor: "#c4b5fd",
+                        }}
+                      />
+                    </td>
 
-                <td>
-                  <select
-                    className="form-select"
-                    style={{
-                      width: "90px",
-                      borderColor: "#6ee7b7",
-                    }}
-                  >
-                    <option>18%</option>
-                    <option>12%</option>
-                    <option>5%</option>
-                    <option>0%</option>
-                  </select>
-                </td>
+                    <td>
+                      <input
+                        className="form-select"
+                        placeholder="Enter GST..."
+                        style={{
+                          width: "90px",
+                          borderColor: "#6ee7b7",
+                        }}
+                      ></input>
+                    </td>
 
-                <td
-                  style={{
-                    color: "#ea580c",
-                    fontWeight: "700",
-                  }}
-                >
-                  ₹10,000
-                </td>
+                    <td
+                      style={{
+                        color: "#ea580c",
+                        fontWeight: "700",
+                      }}
+                    >
+                      ₹10,000
+                    </td>
 
-                <td>
-                  <button
-                    className="btn"
-                    style={{
-                      backgroundColor: "#fee2e2",
-                      color: "#dc2626",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <i className="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
+                    <td>
+                      <button
+                        className="btn"
+                        style={{
+                          backgroundColor: "#fee2e2",
+                          color: "#dc2626",
+                          borderRadius: "8px",
+                        }}
+                      >
+                        <i className="bi bi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
