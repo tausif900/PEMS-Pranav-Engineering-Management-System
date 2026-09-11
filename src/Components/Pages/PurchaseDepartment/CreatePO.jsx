@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
 
 const CreatePO = () => {
-  const [approvedRequests, seAapprovedRequests] = useState([]);
+  const [approvedRequests, setAapprovedRequests] = useState([]);
 
   async function fetchApprovedRequests() {
     try {
       const response = await api.get("/purchase-request/approved-requests");
       console.log(response.data);
+      setAapprovedRequests(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -401,7 +402,7 @@ const CreatePO = () => {
 
                     <td>
                       <input
-                        type="number"
+                        type="text"
                         className="form-control"
                         value={r.requestedQuantity}
                         style={{
@@ -413,7 +414,7 @@ const CreatePO = () => {
 
                     <td>
                       <input
-                        type="number"
+                        type="text"
                         className="form-control"
                         placeholder="Enter unit price..."
                         style={{
@@ -425,7 +426,7 @@ const CreatePO = () => {
 
                     <td>
                       <input
-                        type="number"
+                        type="text"
                         className="form-control"
                         placeholder="Enter discount price..."
                         style={{
@@ -437,7 +438,7 @@ const CreatePO = () => {
 
                     <td>
                       <input
-                        className="form-select"
+                        className="form-control"
                         placeholder="Enter GST..."
                         style={{
                           width: "90px",
