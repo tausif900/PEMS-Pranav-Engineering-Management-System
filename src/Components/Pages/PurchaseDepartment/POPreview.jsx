@@ -39,7 +39,7 @@ const PurchaseOrderPreview = () => {
         <div className="d-flex gap-2">
           <button
             className="btn"
-            onClick={() => navigate("/create-purchase-order")}
+            onClick={() => navigate("/purchase/create-PO")}
             style={{
               backgroundColor: "#fff",
               color: "#8a4b08",

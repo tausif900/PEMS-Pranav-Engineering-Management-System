@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
+import { useForm } from "react-hook-form";
 
 const CreatePO = () => {
   const [approvedRequests, setAapprovedRequests] = useState([]);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   async function fetchApprovedRequests() {
     try {
@@ -15,13 +23,19 @@ const CreatePO = () => {
     }
   }
 
+  const createPO = (data) => {
+    console.log(data);
+    navigate("/purchase-preview");
+  };
+
   useEffect(() => {
     fetchApprovedRequests();
   }, []);
 
   const navigate = useNavigate();
   return (
-    <div
+    <form
+      onSubmit={handleSubmit(createPO)}
       style={{
         minHeight: "100vh",
         padding: "35px",
@@ -92,7 +106,7 @@ const CreatePO = () => {
 
         <div className="row g-4">
           {/* PO Number */}
-          <div className="col-md-4">
+          <div className="col-md-6">
             <label
               className="form-label"
               style={{
@@ -106,17 +120,21 @@ const CreatePO = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="PO-2026-001"
+              placeholder="Enter PO number"
               style={{
                 borderColor: "#fdba74",
                 borderRadius: "10px",
                 padding: "11px",
               }}
+              {...register("poNumber", { required: "Enter PO number" })}
             />
+            {errors.poNumber && (
+              <small className="text-danger">{errors.poNumber.message}</small>
+            )}
           </div>
 
           {/* PO Date */}
-          <div className="col-md-4">
+          <div className="col-md-6">
             <label
               className="form-label"
               style={{
@@ -135,34 +153,11 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
+              {...register("poDate", { required: "Enter Date" })}
             />
-          </div>
-
-          {/* Purchase Request */}
-          <div className="col-md-4">
-            <label
-              className="form-label"
-              style={{
-                color: "#7c3aed",
-                fontWeight: "700",
-              }}
-            >
-              Purchase Request
-            </label>
-
-            <select
-              className="form-select"
-              style={{
-                borderColor: "#c4b5fd",
-                borderRadius: "10px",
-                padding: "11px",
-              }}
-            >
-              <option>Select Purchase Request</option>
-              <option>PR-001 - Oil Filter</option>
-              <option>PR-002 - Air Filter</option>
-              <option>PR-003 - Compressor Part</option>
-            </select>
+            {errors.poDate && (
+              <small className="text-danger">{errors.poDate.message}</small>
+            )}
           </div>
         </div>
       </div>
@@ -199,22 +194,22 @@ const CreatePO = () => {
                 fontWeight: "700",
               }}
             >
-              Select Supplier
+              Supplier
             </label>
 
-            <select
-              className="form-select"
+            <input
+              className="form-control"
+              placeholder="Enter Supplier Name"
               style={{
                 borderColor: "#93c5fd",
                 borderRadius: "10px",
                 padding: "11px",
               }}
-            >
-              <option>Select Supplier</option>
-              <option>Parmar Engineering</option>
-              <option>ABC Auto Components</option>
-              <option>Global Filter Industries</option>
-            </select>
+              {...register("supplier", { required: "Enter Supplier" })}
+            />
+            {errors.supplier && (
+              <small className="text-danger">{errors.supplier.message}</small>
+            )}
           </div>
 
           {/* Contact */}
@@ -238,7 +233,13 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
+              {...register("supplierContactPerson", { required: "Enter Supplier Contact Person" })}
             />
+            {errors.supplierContactPerson && (
+              <small className="text-danger">
+                {errors.supplierContactPerson.message}
+              </small>
+            )}
           </div>
 
           {/* Phone */}
@@ -262,7 +263,13 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
+              {...register("phoneNumber", { required: "Enter Phone Number" })}
             />
+            {errors.phoneNumber && (
+              <small className="text-danger">
+                {errors.phoneNumber.message}
+              </small>
+            )}
           </div>
 
           {/* GST */}
@@ -286,7 +293,11 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
+              {...register("gstNumber", { required: "Enter GST number" })}
             />
+            {errors.gstNumber && (
+              <small className="text-danger">{errors.gstNumber.message}</small>
+            )}
           </div>
 
           {/* Address */}
@@ -311,7 +322,13 @@ const CreatePO = () => {
                 padding: "11px",
                 resize: "none",
               }}
+              {...register("supplierAddress", { required: "Enter Supplier Address" })}
             ></textarea>
+            {errors.supplierAddress && (
+              <small className="text-danger">
+                {errors.supplierAddress.message}
+              </small>
+            )}
           </div>
         </div>
       </div>
@@ -340,6 +357,7 @@ const CreatePO = () => {
           </h5>
 
           <button
+            type="button"
             className="btn"
             style={{
               backgroundColor: "#059669",
@@ -519,7 +537,15 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
+              {...register("expectedDeliveryDate", {
+                required: "Enter Delivery Date",
+              })}
             />
+            {errors.expectedDeliverDate && (
+              <small className="text-danger">
+                {errors.expectedDeliveyDate.message}
+              </small>
+            )}
 
             <label
               className="form-label"
@@ -540,7 +566,15 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 resize: "none",
               }}
+              {...register("deliveryAddress", {
+                required: "Enter Delivery Address",
+              })}
             ></textarea>
+            {errors.deliveryAddress && (
+              <small className="text-danger">
+                {errors.deliveryAddress.message}
+              </small>
+            )}
           </div>
         </div>
 
@@ -584,6 +618,7 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
+              {...register("paymentTerms", { required: "Enter Payment Terms" })}
             >
               <option>Select Payment Terms</option>
               <option>Advance Payment</option>
@@ -591,6 +626,11 @@ const CreatePO = () => {
               <option>60 Days Credit</option>
               <option>90 Days Credit</option>
             </select>
+            {errors.paymentTerms && (
+              <small className="text-danger">
+                {errors.paymentTerms.message}
+              </small>
+            )}
 
             <label
               className="form-label"
@@ -610,7 +650,15 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
+              {...register("paymentDueDate", {
+                required: "Enter Payment Due Date",
+              })}
             />
+            {errors.paymentDueDate && (
+              <small className="text-danger">
+                {errors.paymentDueDate.message}
+              </small>
+            )}
           </div>
         </div>
       </div>
@@ -776,12 +824,21 @@ const CreatePO = () => {
             borderRadius: "10px",
             resize: "none",
           }}
+          {...register("termsAndConditions", {
+            required: "Enter terms and conditions",
+          })}
         ></textarea>
+        {errors.termsAndConditions && (
+          <small className="text-danger">
+            {errors.termsAndConditions.message}
+          </small>
+        )}
       </div>
 
       {/* Bottom Buttons */}
       <div className="d-flex justify-content-end gap-3">
         <button
+          type="button"
           className="btn"
           onClick={() => navigate("/purchase-dashboard")}
           style={{
@@ -797,6 +854,7 @@ const CreatePO = () => {
         </button>
 
         <button
+          type="button"
           className="btn"
           style={{
             backgroundColor: "#f59e0b",
@@ -812,6 +870,7 @@ const CreatePO = () => {
 
         <button
           className="btn"
+          type="submit"
           style={{
             background: "linear-gradient(135deg, #ff8500, #d96c00)",
             color: "#fff",
@@ -820,13 +879,12 @@ const CreatePO = () => {
             padding: "11px 25px",
             fontWeight: "700",
           }}
-          onClick={() => navigate("/purchase-preview")}
         >
           <i className="bi bi-send me-2"></i>
           Create Purchase Order
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
