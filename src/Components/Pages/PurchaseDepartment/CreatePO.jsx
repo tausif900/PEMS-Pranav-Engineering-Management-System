@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 const CreatePO = () => {
   const [approvedRequests, setAapprovedRequests] = useState([]);
@@ -11,26 +11,32 @@ const CreatePO = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    control,
   } = useForm();
 
-  async function fetchApprovedRequests() {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "orderItems",
+  });
+
+  const addOrderItems = async () => {
     try {
       const response = await api.get("/purchase-request/approved-requests");
       console.log(response.data);
+      const data = response.data;
       setAapprovedRequests(response.data);
+      console.log("Calculated Order Item", data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const createPO = (data) => {
     console.log(data);
     navigate("/purchase-preview");
   };
 
-  useEffect(() => {
-    fetchApprovedRequests();
-  }, []);
+  useEffect(() => {}, []);
 
   const navigate = useNavigate();
   return (
@@ -233,7 +239,9 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("supplierContactPerson", { required: "Enter Supplier Contact Person" })}
+              {...register("supplierContactPerson", {
+                required: "Enter Supplier Contact Person",
+              })}
             />
             {errors.supplierContactPerson && (
               <small className="text-danger">
@@ -322,7 +330,9 @@ const CreatePO = () => {
                 padding: "11px",
                 resize: "none",
               }}
-              {...register("supplierAddress", { required: "Enter Supplier Address" })}
+              {...register("supplierAddress", {
+                required: "Enter Supplier Address",
+              })}
             ></textarea>
             {errors.supplierAddress && (
               <small className="text-danger">
@@ -365,7 +375,9 @@ const CreatePO = () => {
               borderRadius: "8px",
               fontWeight: "600",
             }}
-            onClick={() => fetchApprovedRequests()}
+            onClick={() => {
+              addOrderItems();
+            }}
           >
             <i className="bi bi-plus-lg me-2"></i>
             Add Item
@@ -389,7 +401,7 @@ const CreatePO = () => {
                 <th style={{ color: "#047857" }}>Code</th>
                 <th style={{ color: "#047857" }}>Quantity</th>
                 <th style={{ color: "#047857" }}>Unit Price</th>
-                <th style={{ color: "#047857" }}>Discount</th>
+                <th style={{ color: "#047857" }}>Discount %</th>
                 <th style={{ color: "#047857" }}>GST %</th>
                 <th style={{ color: "#047857" }}>Total</th>
                 <th style={{ color: "#047857" }}>Action</th>
@@ -477,6 +489,7 @@ const CreatePO = () => {
                     <td>
                       <button
                         className="btn"
+                        type="button"
                         style={{
                           backgroundColor: "#fee2e2",
                           color: "#dc2626",
