@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { api } from "../../api";
 import { useFieldArray, useForm } from "react-hook-form";
 
 const CreatePO = () => {
-  const [approvedRequests, setAapprovedRequests] = useState([]);
+  const [approvedRequest, setApprovedRequest] = useState([]);
 
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
     control,
+    formState: { errors },
   } = useForm();
 
   const { fields, append, remove } = useFieldArray({
@@ -19,34 +18,36 @@ const CreatePO = () => {
     name: "orderItems",
   });
 
-  const addOrderItems = async () => {
+  // fecthing approved request
+  const fetchApprovedRequest = async () => {
     try {
       const response = await api.get("/purchase-request/approved-requests");
       console.log(response.data);
-      const data = response.data;
-      setAapprovedRequests(response.data);
-      console.log("Calculated Order Item", data);
+      setApprovedRequest(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const createPO = (data) => {
-    console.log(data);
-    navigate("/purchase-preview");
+  // function for creating PO
+  const createPO = async (data) => {
+    try {
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {}, []);
 
-  const navigate = useNavigate();
   return (
     <form
-      onSubmit={handleSubmit(createPO)}
       style={{
         minHeight: "100vh",
         padding: "35px",
         background: "linear-gradient(135deg, #fffaf2, #fff3df)",
       }}
+      onSubmit={handleSubmit(createPO)}
     >
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -132,11 +133,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("poNumber", { required: "Enter PO number" })}
+              {...register("poNumber")}
             />
-            {errors.poNumber && (
-              <small className="text-danger">{errors.poNumber.message}</small>
-            )}
           </div>
 
           {/* PO Date */}
@@ -159,11 +157,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("poDate", { required: "Enter Date" })}
+              {...register("poDate")}
             />
-            {errors.poDate && (
-              <small className="text-danger">{errors.poDate.message}</small>
-            )}
           </div>
         </div>
       </div>
@@ -211,11 +206,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("supplier", { required: "Enter Supplier" })}
+              {...register("supplier")}
             />
-            {errors.supplier && (
-              <small className="text-danger">{errors.supplier.message}</small>
-            )}
           </div>
 
           {/* Contact */}
@@ -239,15 +231,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("supplierContactPerson", {
-                required: "Enter Supplier Contact Person",
-              })}
+              {...register("supplierContactPerson")}
             />
-            {errors.supplierContactPerson && (
-              <small className="text-danger">
-                {errors.supplierContactPerson.message}
-              </small>
-            )}
           </div>
 
           {/* Phone */}
@@ -271,13 +256,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("phoneNumber", { required: "Enter Phone Number" })}
+              {...register("phoneNumber")}
             />
-            {errors.phoneNumber && (
-              <small className="text-danger">
-                {errors.phoneNumber.message}
-              </small>
-            )}
           </div>
 
           {/* GST */}
@@ -301,11 +281,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("gstNumber", { required: "Enter GST number" })}
+              {...register("gstNumber")}
             />
-            {errors.gstNumber && (
-              <small className="text-danger">{errors.gstNumber.message}</small>
-            )}
           </div>
 
           {/* Address */}
@@ -330,15 +307,8 @@ const CreatePO = () => {
                 padding: "11px",
                 resize: "none",
               }}
-              {...register("supplierAddress", {
-                required: "Enter Supplier Address",
-              })}
+              {...register("supplierAddress")}
             ></textarea>
-            {errors.supplierAddress && (
-              <small className="text-danger">
-                {errors.supplierAddress.message}
-              </small>
-            )}
           </div>
         </div>
       </div>
@@ -368,18 +338,11 @@ const CreatePO = () => {
 
           <button
             type="button"
-            className="btn"
-            style={{
-              backgroundColor: "#059669",
-              color: "#fff",
-              borderRadius: "8px",
-              fontWeight: "600",
-            }}
+            className="btn btn-success"
             onClick={() => {
-              addOrderItems();
+              fetchApprovedRequest();
             }}
           >
-            <i className="bi bi-plus-lg me-2"></i>
             Add Item
           </button>
         </div>
@@ -408,101 +371,116 @@ const CreatePO = () => {
               </tr>
             </thead>
 
-            <tbody>
-              {approvedRequests.map((r) => {
-                return (
-                  <tr>
-                    <td
-                      style={{
-                        color: "#9a3412",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {r.productName}
-                    </td>
+            {approvedRequest.length > 0 ? (
+              <>
+                <tbody>
+                  {approvedRequest.map((r) => {
+                    return (
+                      <tr key={r.requestId}>
+                        <td
+                          style={{
+                            color: "#9a3412",
+                            fontWeight: "700",
+                          }}
+                        >
+                          {r.productName}
+                        </td>
 
-                    <td
-                      style={{
-                        color: "#2563eb",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {r.productCode}
-                    </td>
+                        <td
+                          style={{
+                            color: "#2563eb",
+                            fontWeight: "600",
+                          }}
+                        >
+                          {r.productCode}
+                        </td>
 
-                    <td>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={r.requestedQuantity}
-                        style={{
-                          width: "90px",
-                          borderColor: "#93c5fd",
-                        }}
-                      />
-                    </td>
+                        <td>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder={r.requestedQuantity}
+                            style={{
+                              width: "90px",
+                              borderColor: "#93c5fd",
+                            }}
+                            readOnly
+                          />
+                        </td>
 
-                    <td>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter unit price..."
-                        style={{
-                          width: "110px",
-                          borderColor: "#fdba74",
-                        }}
-                      />
-                    </td>
+                        <td>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter unit price..."
+                            style={{
+                              width: "110px",
+                              borderColor: "#fdba74",
+                            }}
+                          />
+                        </td>
 
-                    <td>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter discount price..."
-                        style={{
-                          width: "100px",
-                          borderColor: "#c4b5fd",
-                        }}
-                      />
-                    </td>
+                        <td>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter discount price..."
+                            style={{
+                              width: "100px",
+                              borderColor: "#c4b5fd",
+                            }}
+                          />
+                        </td>
 
-                    <td>
-                      <input
-                        className="form-control"
-                        placeholder="Enter GST..."
-                        style={{
-                          width: "90px",
-                          borderColor: "#6ee7b7",
-                        }}
-                      ></input>
-                    </td>
+                        <td>
+                          <input
+                            className="form-control"
+                            placeholder="Enter GST..."
+                            style={{
+                              width: "90px",
+                              borderColor: "#6ee7b7",
+                            }}
+                          ></input>
+                        </td>
 
-                    <td
-                      style={{
-                        color: "#ea580c",
-                        fontWeight: "700",
-                      }}
-                    >
-                      ₹10,000
-                    </td>
+                        <td
+                          style={{
+                            color: "#ea580c",
+                            fontWeight: "700",
+                          }}
+                        >
+                          ₹10,000
+                        </td>
 
-                    <td>
-                      <button
-                        className="btn"
-                        type="button"
-                        style={{
-                          backgroundColor: "#fee2e2",
-                          color: "#dc2626",
-                          borderRadius: "8px",
-                        }}
-                      >
-                        <i className="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
+                        <td>
+                          <button
+                            className="btn"
+                            type="button"
+                            style={{
+                              backgroundColor: "#fee2e2",
+                              color: "#dc2626",
+                              borderRadius: "8px",
+                            }}
+                          >
+                            <i className="bi bi-trash"></i>
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-primary m-2"
+                          >
+                            Calculate
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </>
+            ) : (
+              <button className="btn btn-primary" hidden>
+                Calculate
+              </button>
+            )}
           </table>
         </div>
       </div>
@@ -550,15 +528,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("expectedDeliveryDate", {
-                required: "Enter Delivery Date",
-              })}
+              {...register("expectedDliveryDate")}
             />
-            {errors.expectedDeliverDate && (
-              <small className="text-danger">
-                {errors.expectedDeliveyDate.message}
-              </small>
-            )}
 
             <label
               className="form-label"
@@ -579,15 +550,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 resize: "none",
               }}
-              {...register("deliveryAddress", {
-                required: "Enter Delivery Address",
-              })}
+              {...register("deliveryAddress")}
             ></textarea>
-            {errors.deliveryAddress && (
-              <small className="text-danger">
-                {errors.deliveryAddress.message}
-              </small>
-            )}
           </div>
         </div>
 
@@ -631,7 +595,7 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("paymentTerms", { required: "Enter Payment Terms" })}
+              {...register("paymentTerms")}
             >
               <option>Select Payment Terms</option>
               <option>Advance Payment</option>
@@ -639,11 +603,6 @@ const CreatePO = () => {
               <option>60 Days Credit</option>
               <option>90 Days Credit</option>
             </select>
-            {errors.paymentTerms && (
-              <small className="text-danger">
-                {errors.paymentTerms.message}
-              </small>
-            )}
 
             <label
               className="form-label"
@@ -663,15 +622,8 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("paymentDueDate", {
-                required: "Enter Payment Due Date",
-              })}
+              {...register("paymentDueDate")}
             />
-            {errors.paymentDueDate && (
-              <small className="text-danger">
-                {errors.paymentDueDate.message}
-              </small>
-            )}
           </div>
         </div>
       </div>
@@ -837,15 +789,8 @@ const CreatePO = () => {
             borderRadius: "10px",
             resize: "none",
           }}
-          {...register("termsAndConditions", {
-            required: "Enter terms and conditions",
-          })}
+          {...register("termsAndCondition")}
         ></textarea>
-        {errors.termsAndConditions && (
-          <small className="text-danger">
-            {errors.termsAndConditions.message}
-          </small>
-        )}
       </div>
 
       {/* Bottom Buttons */}
