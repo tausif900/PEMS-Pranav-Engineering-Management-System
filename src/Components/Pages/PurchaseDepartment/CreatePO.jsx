@@ -4,6 +4,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 
 const CreatePO = () => {
   const [approvedRequest, setApprovedRequest] = useState([]);
+  const [totalAmountOfOrderItem, setTotalAmountOfOrderItem] = useState([]);
 
   const {
     register,
@@ -13,7 +14,7 @@ const CreatePO = () => {
     formState: { errors },
   } = useForm();
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, update } = useFieldArray({
     control,
     name: "orderItems",
   });
@@ -24,6 +25,7 @@ const CreatePO = () => {
       const response = await api.get("/purchase-request/approved-requests");
       console.log(response.data);
       setApprovedRequest(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +35,23 @@ const CreatePO = () => {
   const createPO = async (data) => {
     try {
       console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // calculate orderItems
+  const calculateOrderItem = async (index) => {
+    try {
+      const item = watch(`orderItems.${index}`);
+      const response = await api.post("/order-items/add-items", item);
+      console.log(response.data);
+      setTotalAmountOfOrderItem((prev) => ({
+        ...prev,
+        [index]: response.data.totalAmount,
+      }));
+
+      update(index, { ...item, totalAmount: response.data.totalAmount });
     } catch (error) {
       console.log(error);
     }
@@ -339,8 +358,19 @@ const CreatePO = () => {
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => {
-              fetchApprovedRequest();
+            onClick={async () => {
+              const data = await fetchApprovedRequest();
+              append(
+                data.map((r) => ({
+                  productName: r.productName,
+                  productCode: r.productCode,
+                  requestedQuantity: r.requestedQuantity,
+                  unitPrice: "",
+                  discount: "",
+                  gst: "",
+                  totalAmount: 0,
+                })),
+              );
             }}
           >
             Add Item
@@ -374,16 +404,16 @@ const CreatePO = () => {
             {approvedRequest.length > 0 ? (
               <>
                 <tbody>
-                  {approvedRequest.map((r) => {
+                  {fields.map((field, index) => {
                     return (
-                      <tr key={r.requestId}>
+                      <tr key={field.id}>
                         <td
                           style={{
                             color: "#9a3412",
                             fontWeight: "700",
                           }}
                         >
-                          {r.productName}
+                          {field.productName}
                         </td>
 
                         <td
@@ -392,14 +422,14 @@ const CreatePO = () => {
                             fontWeight: "600",
                           }}
                         >
-                          {r.productCode}
+                          {field.productCode}
                         </td>
 
                         <td>
                           <input
                             type="text"
                             className="form-control"
-                            placeholder={r.requestedQuantity}
+                            placeholder={field.requestedQuantity}
                             style={{
                               width: "90px",
                               borderColor: "#93c5fd",
@@ -417,6 +447,7 @@ const CreatePO = () => {
                               width: "110px",
                               borderColor: "#fdba74",
                             }}
+                            {...register(`orderItems.${index}.unitPrice`)}
                           />
                         </td>
 
@@ -429,6 +460,7 @@ const CreatePO = () => {
                               width: "100px",
                               borderColor: "#c4b5fd",
                             }}
+                            {...register(`orderItems.${index}.discount`)}
                           />
                         </td>
 
@@ -440,6 +472,7 @@ const CreatePO = () => {
                               width: "90px",
                               borderColor: "#6ee7b7",
                             }}
+                            {...register(`orderItems.${index}.gst`)}
                           ></input>
                         </td>
 
@@ -449,7 +482,7 @@ const CreatePO = () => {
                             fontWeight: "700",
                           }}
                         >
-                          ₹10,000
+                          ₹ {totalAmountOfOrderItem[index] || 0}
                         </td>
 
                         <td>
@@ -467,6 +500,9 @@ const CreatePO = () => {
                           <button
                             type="button"
                             className="btn btn-primary m-2"
+                            onClick={() => {
+                              calculateOrderItem(index);
+                            }}
                           >
                             Calculate
                           </button>
