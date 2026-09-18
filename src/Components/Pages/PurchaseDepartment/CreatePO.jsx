@@ -5,6 +5,13 @@ import { useFieldArray, useForm } from "react-hook-form";
 const CreatePO = () => {
   const [approvedRequest, setApprovedRequest] = useState([]);
   const [totalAmountOfOrderItem, setTotalAmountOfOrderItem] = useState([]);
+  const [orderSummary, setOrderSummary] = useState({
+    subTotal: 0,
+    discount: 0,
+    cgst: 0,
+    sgst: 0,
+    grandTotal: 0,
+  });
 
   const {
     register,
@@ -35,6 +42,62 @@ const CreatePO = () => {
   const createPO = async (data) => {
     try {
       console.log(data);
+      const orderItems = data.orderItems;
+      console.log(orderItems);
+
+      // subtotal =  quantity of per item * price of per item
+      const subTotal = orderItems.reduce((total, item) => {
+        return total + Number(item.requestedQuantity) * Number(item.unitPrice);
+      }, 0);
+
+      // totalDiscount = Price of per item * discount Of per item then us price se utna discount minus krdege
+      const totalDiscount = orderItems.reduce((total, item) => {
+        const itemTotal =
+          Number(item.requestedQuantity) * Number(item.unitPrice);
+        const discount = (itemTotal * Number(item.discount || 0)) / 100;
+        return total + discount;
+      }, 0);
+
+      const afterDiscount = subTotal - totalDiscount;
+
+      // Cgst 9%
+      const totalCgst = orderItems.reduce((total, item) => {
+        const itemTotal =
+          Number(item.requestedQuantity) * Number(item.unitPrice);
+        const cgst = (itemTotal * 9) / 100;
+        return total + cgst;
+      }, 0);
+
+      // Sgst 9%
+      const totalSgst = orderItems.reduce((total, item) => {
+        const itemTotal =
+          Number(item.requestedQuantity) * Number(item.unitPrice);
+        const sgst = (itemTotal * 9) / 100;
+        return total + sgst;
+      }, 0);
+
+      // GrandTotal
+      const grandTotal = afterDiscount + totalCgst + totalSgst;
+
+      setOrderSummary({
+        subTotal,
+        discount: totalDiscount,
+        cgst: totalCgst,
+        sgst: totalSgst,
+        grandTotal,
+      });
+
+      const poData = {
+        ...data,
+        subTotal,
+        discount: totalDiscount,
+        cgst: totalCgst,
+        sgst: totalSgst,
+        grandTotal,
+      };
+
+      const response = await api.post("purchase-order/create-PO", poData);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -56,6 +119,8 @@ const CreatePO = () => {
       console.log(error);
     }
   };
+
+  // calculate subtotal
 
   useEffect(() => {}, []);
 
@@ -447,6 +512,7 @@ const CreatePO = () => {
                               width: "110px",
                               borderColor: "#fdba74",
                             }}
+                            required
                             {...register(`orderItems.${index}.unitPrice`)}
                           />
                         </td>
@@ -460,6 +526,7 @@ const CreatePO = () => {
                               width: "100px",
                               borderColor: "#c4b5fd",
                             }}
+                            required
                             {...register(`orderItems.${index}.discount`)}
                           />
                         </td>
@@ -472,6 +539,7 @@ const CreatePO = () => {
                               width: "90px",
                               borderColor: "#6ee7b7",
                             }}
+                            required
                             {...register(`orderItems.${index}.gst`)}
                           ></input>
                         </td>
@@ -704,7 +772,7 @@ const CreatePO = () => {
                   fontWeight: "700",
                 }}
               >
-                ₹10,000
+                ₹ {orderSummary.subTotal}
               </span>
             </div>
 
@@ -724,7 +792,7 @@ const CreatePO = () => {
                   fontWeight: "700",
                 }}
               >
-                ₹0
+                ₹ {orderSummary.discount}
               </span>
             </div>
 
@@ -744,7 +812,7 @@ const CreatePO = () => {
                   fontWeight: "700",
                 }}
               >
-                ₹900
+                ₹ {orderSummary.cgst}
               </span>
             </div>
 
@@ -764,7 +832,7 @@ const CreatePO = () => {
                   fontWeight: "700",
                 }}
               >
-                ₹900
+                ₹ {orderSummary.sgst}
               </span>
             </div>
 
@@ -788,7 +856,7 @@ const CreatePO = () => {
                   fontWeight: "800",
                 }}
               >
-                ₹11,800
+                ₹ {orderSummary.grandTotal}
               </span>
             </div>
           </div>
