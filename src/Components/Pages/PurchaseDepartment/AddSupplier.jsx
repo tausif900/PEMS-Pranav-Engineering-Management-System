@@ -9,10 +9,12 @@ const AddSupplier = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const addSupplier = (data) => {
     console.log(data);
+    reset();
   };
 
   return (
@@ -84,7 +86,7 @@ const AddSupplier = () => {
                 fontWeight: "700",
               }}
             >
-              Supplier Name
+              Supplier Company Name
             </label>
 
             <input
