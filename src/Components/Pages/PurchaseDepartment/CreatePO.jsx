@@ -217,8 +217,11 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("poNumber")}
+              {...register("poNumber", { required: "Provide PO Number" })}
             />
+            {errors.poNumber && (
+              <small className="text-danger">{errors.poNumber.message}</small>
+            )}
           </div>
 
           {/* PO Date */}
@@ -241,8 +244,11 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("poDate")}
+              {...register("poDate", { required: "PO date is required" })}
             />
+            {errors.poDate && (
+              <small className="text-danger">{errors.poDate.message}</small>
+            )}
           </div>
         </div>
       </div>
@@ -290,8 +296,13 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("supplier")}
+              {...register("supplier", {
+                required: "Supplier can not be empty",
+              })}
             />
+            {errors.supplier && (
+              <small className="text-danger">{errors.supplier.message}</small>
+            )}
           </div>
 
           {/* Contact */}
@@ -315,8 +326,15 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("supplierContactPerson")}
+              {...register("supplierContactPerson", {
+                required: "Provide contact of supplier",
+              })}
             />
+            {errors.supplierContactPerson && (
+              <small className="text-danger">
+                {errors.supplierContactPerson.message}
+              </small>
+            )}
           </div>
 
           {/* Phone */}
@@ -340,8 +358,13 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("phoneNumber")}
+              {...register("phoneNumber", { required: "Provide Phone number" })}
             />
+            {errors.phoneNumber && (
+              <small className="text-danger">
+                {errors.phoneNumber.message}
+              </small>
+            )}
           </div>
 
           {/* GST */}
@@ -365,8 +388,11 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("gstNumber")}
+              {...register("gstNumber", { required: "GST number is required" })}
             />
+            {errors.gstNumber && (
+              <small className="text-danger">{errors.gstNumber.message}</small>
+            )}
           </div>
 
           {/* Address */}
@@ -391,8 +417,13 @@ const CreatePO = () => {
                 padding: "11px",
                 resize: "none",
               }}
-              {...register("supplierAddress")}
+              {...register("supplierAddress", { required: "Provide Address" })}
             ></textarea>
+            {errors.supplierAddress && (
+              <small className="text-danger">
+                {errors.supplierAddress.message}
+              </small>
+            )}
           </div>
         </div>
       </div>
@@ -512,9 +543,15 @@ const CreatePO = () => {
                               width: "110px",
                               borderColor: "#fdba74",
                             }}
-                            required
-                            {...register(`orderItems.${index}.unitPrice`)}
+                            {...register(`orderItems.${index}.unitPrice`, {
+                              required: "unit price",
+                            })}
                           />
+                          {errors.unitPrice && (
+                            <small className="text-danger">
+                              {errors.unitPrice.message}
+                            </small>
+                          )}
                         </td>
 
                         <td>
@@ -527,8 +564,15 @@ const CreatePO = () => {
                               borderColor: "#c4b5fd",
                             }}
                             required
-                            {...register(`orderItems.${index}.discount`)}
+                            {...register(`orderItems.${index}.discount`, {
+                              required: "discount",
+                            })}
                           />
+                          {errors.discount && (
+                            <small className="text-danger">
+                              {errors.discount.message}
+                            </small>
+                          )}
                         </td>
 
                         <td>
@@ -540,8 +584,15 @@ const CreatePO = () => {
                               borderColor: "#6ee7b7",
                             }}
                             required
-                            {...register(`orderItems.${index}.gst`)}
-                          ></input>
+                            {...register(`orderItems.${index}.gst`, {
+                              required: "gst",
+                            })}
+                          />
+                          {errors.gst && (
+                            <small className="text-danger">
+                              {errors.gst.message}
+                            </small>
+                          )}
                         </td>
 
                         <td
@@ -626,36 +677,52 @@ const CreatePO = () => {
 
             <input
               type="date"
-              className="form-control mb-3"
+              className="form-control"
               style={{
                 borderColor: "#7dd3fc",
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("expectedDliveryDate")}
+              {...register("expectedDeliveryDate", {
+                required: "Provide Expected Delivery Date",
+              })}
             />
+            {errors.expectedDeliveryDate && (
+              <small className="text-danger">
+                {errors.expectedDeliveryDate.message}
+              </small>
+            )}
 
-            <label
-              className="form-label"
-              style={{
-                color: "#7c3aed",
-                fontWeight: "600",
-              }}
-            >
-              Delivery Address
-            </label>
-
-            <textarea
-              className="form-control"
-              rows="3"
-              placeholder="Enter delivery address"
-              style={{
-                borderColor: "#c4b5fd",
-                borderRadius: "10px",
-                resize: "none",
-              }}
-              {...register("deliveryAddress")}
-            ></textarea>
+            <div>
+              {" "}
+              <label
+                className="form-label mt-3"
+                style={{
+                  color: "#7c3aed",
+                  fontWeight: "600",
+                }}
+              >
+                Delivery Address
+              </label>
+              <textarea
+                className="form-control"
+                rows="3"
+                placeholder="Enter delivery address"
+                style={{
+                  borderColor: "#c4b5fd",
+                  borderRadius: "10px",
+                  resize: "none",
+                }}
+                {...register("deliveryAddress", {
+                  required: "Provide Delivery Address",
+                })}
+              ></textarea>
+              {errors.deliveryAddress && (
+                <small className="text-danger">
+                  {errors.deliveryAddress.message}
+                </small>
+              )}
+            </div>
           </div>
         </div>
 
@@ -682,34 +749,41 @@ const CreatePO = () => {
               Payment Terms
             </h5>
 
-            <label
-              className="form-label"
-              style={{
-                color: "#d97706",
-                fontWeight: "600",
-              }}
-            >
-              Payment Terms
-            </label>
+            <div>
+              {" "}
+              <label
+                className="form-label"
+                style={{
+                  color: "#d97706",
+                  fontWeight: "600",
+                }}
+              >
+                Payment Terms
+              </label>
+              <select
+                className="form-select"
+                style={{
+                  borderColor: "#fcd34d",
+                  borderRadius: "10px",
+                  padding: "11px",
+                }}
+                {...register("paymentTerms", {
+                  required: "Select Payment Terms",
+                })}
+              >
+                <option value="">Select Payment Terms</option>
+                <option>Advance Payment</option>
+                <option>30 Days Credit</option>
+                <option>60 Days Credit</option>
+                <option>90 Days Credit</option>
+              </select>
+              {errors.paymentTerms && (
+                <small className="text-danger">Select Payment Terms</small>
+              )}
+            </div>
 
-            <select
-              className="form-select mb-3"
-              style={{
-                borderColor: "#fcd34d",
-                borderRadius: "10px",
-                padding: "11px",
-              }}
-              {...register("paymentTerms")}
-            >
-              <option>Select Payment Terms</option>
-              <option>Advance Payment</option>
-              <option>30 Days Credit</option>
-              <option>60 Days Credit</option>
-              <option>90 Days Credit</option>
-            </select>
-
             <label
-              className="form-label"
+              className="form-label mt-3"
               style={{
                 color: "#059669",
                 fontWeight: "600",
@@ -726,8 +800,13 @@ const CreatePO = () => {
                 borderRadius: "10px",
                 padding: "11px",
               }}
-              {...register("paymentDueDate")}
+              {...register("paymentDueDate", { required: "Payment Due Date" })}
             />
+            {errors.paymentDueDate && (
+              <small className="text-danger">
+                {errors.paymentDueDate.message}
+              </small>
+            )}
           </div>
         </div>
       </div>
@@ -893,8 +972,15 @@ const CreatePO = () => {
             borderRadius: "10px",
             resize: "none",
           }}
-          {...register("termsAndCondition")}
+          {...register("termsAndCondition", {
+            required: "Terms and Condition",
+          })}
         ></textarea>
+        {errors.termsAndCondition && (
+          <small className="text-danger">
+            {errors.termsAndCondition.message}
+          </small>
+        )}
       </div>
 
       {/* Bottom Buttons */}
