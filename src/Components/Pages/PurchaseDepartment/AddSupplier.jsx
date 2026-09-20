@@ -1,8 +1,20 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 const AddSupplier = () => {
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const addSupplier = (data) => {
+    console.log(data);
+  };
+
   return (
     <div
       style={{
@@ -53,6 +65,7 @@ const AddSupplier = () => {
 
       {/* Form Card */}
       <form
+        onSubmit={handleSubmit(addSupplier)}
         style={{
           backgroundColor: "#ffffff",
           borderRadius: "20px",
@@ -84,7 +97,15 @@ const AddSupplier = () => {
                 padding: "11px",
                 boxShadow: "none",
               }}
+              {...register("supplierName", {
+                required: "Please Enter a name.",
+              })}
             />
+            {errors.supplierName && (
+              <small className="text-danger">
+                {errors.supplierName.message}
+              </small>
+            )}
           </div>
 
           {/* Supplier Code */}
@@ -108,8 +129,18 @@ const AddSupplier = () => {
                 borderRadius: "10px",
                 padding: "11px",
                 boxShadow: "none",
+                textTransform: "uppercase",
               }}
+              {...register("supplierCode", {
+                required: "Please Enter a Code",
+                setValueAs: (value) => value.toUpperCase(),
+              })}
             />
+            {errors.supplierCode && (
+              <small className="text-danger">
+                {errors.supplierCode.message}
+              </small>
+            )}
           </div>
 
           {/* Contact Person */}
@@ -134,7 +165,15 @@ const AddSupplier = () => {
                 padding: "11px",
                 boxShadow: "none",
               }}
+              {...register("contactPerson", {
+                required: "Please Enter a name.",
+              })}
             />
+            {errors.contactPerson && (
+              <small className="text-danger">
+                {errors.contactPerson.message}
+              </small>
+            )}
           </div>
 
           {/* Phone */}
@@ -159,7 +198,15 @@ const AddSupplier = () => {
                 padding: "11px",
                 boxShadow: "none",
               }}
+              {...register("phoneNumber", {
+                required: "Please Enter a name.",
+              })}
             />
+            {errors.phoneNumber && (
+              <small className="text-danger">
+                {errors.phoneNumber.message}
+              </small>
+            )}
           </div>
 
           {/* Email */}
@@ -184,7 +231,17 @@ const AddSupplier = () => {
                 padding: "11px",
                 boxShadow: "none",
               }}
+              {...register("email", {
+                required: "Please Enter email",
+                pattern: {
+                  value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
+                  message: "Please enter a valid email address",
+                },
+              })}
             />
+            {errors.email && (
+              <small className="text-danger">{errors.email.message}</small>
+            )}
           </div>
 
           {/* GST Number */}
@@ -209,32 +266,13 @@ const AddSupplier = () => {
                 padding: "11px",
                 boxShadow: "none",
               }}
+              {...register("gstNumber", {
+                required: "Please Enter GST number.",
+              })}
             />
-          </div>
-
-          {/* Product Type */}
-          <div className="col-md-6">
-            <label
-              className="form-label"
-              style={{
-                color: "#0284c7",
-                fontWeight: "700",
-              }}
-            >
-              Product / Material Type
-            </label>
-
-            <input
-              type="text"
-              className="form-control"
-              placeholder="e.g. Oil Filter, Air Filter"
-              style={{
-                border: "1px solid #7dd3fc",
-                borderRadius: "10px",
-                padding: "11px",
-                boxShadow: "none",
-              }}
-            />
+            {errors.gstNumber && (
+              <small className="text-danger">{errors.gstNumber.message}</small>
+            )}
           </div>
 
           {/* Status */}
@@ -257,10 +295,17 @@ const AddSupplier = () => {
                 padding: "11px",
                 boxShadow: "none",
               }}
+              {...register("status", {
+                required: "Please select status.",
+              })}
             >
+              <option value="">Select Status</option>
               <option>Active</option>
               <option>Inactive</option>
             </select>
+            {errors.status && (
+              <small className="text-danger">{errors.status.message}</small>
+            )}
           </div>
 
           {/* Address */}
@@ -286,7 +331,11 @@ const AddSupplier = () => {
                 boxShadow: "none",
                 resize: "none",
               }}
+              {...register("address", { required: "Please enter a address" })}
             ></textarea>
+            {errors.address && (
+              <small className="text-danger">{errors.address.message}</small>
+            )}
           </div>
 
           {/* Buttons */}
