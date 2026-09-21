@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../api";
 
 const AddSupplier = () => {
   const navigate = useNavigate();
@@ -12,9 +13,15 @@ const AddSupplier = () => {
     reset,
   } = useForm();
 
-  const addSupplier = (data) => {
-    console.log(data);
-    reset();
+  const addSupplier = async (data) => {
+    try {
+      const response = await api.post("supplier/add-supplier", data);
+      console.log(response.data);
+      alert("New Supplier Added in the Database");
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
