@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { api } from "../../api";
 import { useFieldArray, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const CreatePO = () => {
+  const navigate = useNavigate();
   const [approvedRequest, setApprovedRequest] = useState([]);
   const [totalAmountOfOrderItem, setTotalAmountOfOrderItem] = useState([]);
   const [orderSummary, setOrderSummary] = useState({
@@ -98,6 +100,7 @@ const CreatePO = () => {
 
       const response = await api.post("purchase-order/create-PO", poData);
       console.log(response.data);
+      navigate(`/purchase-preview/${response.data.poId}`);
     } catch (error) {
       console.log(error);
     }

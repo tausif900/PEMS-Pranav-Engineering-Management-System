@@ -154,7 +154,7 @@ const router = createBrowserRouter([
     element: <CreatePO />,
   },
   {
-    path: "/purchase-preview",
+    path: "/purchase-preview/:poID",
     element: <POPreview />,
   },
   {

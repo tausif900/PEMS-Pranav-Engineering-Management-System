@@ -229,6 +229,14 @@ const StockOverview = () => {
                         {dp.productLocation}
                       </strong>
                     </div>
+
+                     <div className="d-flex justify-content-between mb-2">
+                      <span style={{ color: "#725b32" }}>Supplier</span>
+
+                      <strong style={{ color: "#4b3208" }}>
+                        {dp.supplier}
+                      </strong>
+                    </div>
                   </div>
 
                   {/* Status */}
