@@ -41,70 +41,70 @@ const CreatePO = () => {
   };
 
   // function for creating PO
-  const createPO = (data) => {
-    console.log(data);
-    // try {
-    //   console.log(data);
-    //   const orderItems = data.orderItems;
-    //   console.log(orderItems);
+  const createPO = async (data) => {
+    try {
+      console.log(data);
+      const orderItems = data.orderItems;
+      console.log(orderItems);
 
-    //   // subtotal =  quantity of per item * price of per item
-    //   const subTotal = orderItems.reduce((total, item) => {
-    //     return total + Number(item.requestedQuantity) * Number(item.unitPrice);
-    //   }, 0);
+      // subtotal =  quantity of per item * price of per item
+      const subTotal = orderItems.reduce((total, item) => {
+        return total + Number(item.requestedQuantity) * Number(item.unitPrice);
+      }, 0);
 
-    //   // totalDiscount = Price of per item * discount Of per item then us price se utna discount minus krdege
-    //   const totalDiscount = orderItems.reduce((total, item) => {
-    //     const itemTotal =
-    //       Number(item.requestedQuantity) * Number(item.unitPrice);
-    //     const discount = (itemTotal * Number(item.discount || 0)) / 100;
-    //     return total + discount;
-    //   }, 0);
+      // totalDiscount = Price of per item * discount Of per item then us price se utna discount minus krdege
+      const totalDiscount = orderItems.reduce((total, item) => {
+        const itemTotal =
+          Number(item.requestedQuantity) * Number(item.unitPrice);
+        const discount = (itemTotal * Number(item.discount || 0)) / 100;
+        return total + discount;
+      }, 0);
 
-    //   const afterDiscount = subTotal - totalDiscount;
+      const afterDiscount = subTotal - totalDiscount;
 
-    //   // Cgst 9%
-    //   const totalCgst = orderItems.reduce((total, item) => {
-    //     const itemTotal =
-    //       Number(item.requestedQuantity) * Number(item.unitPrice);
-    //     const cgst = (itemTotal * 9) / 100;
-    //     return total + cgst;
-    //   }, 0);
+      // Cgst 9%
+      const totalCgst = orderItems.reduce((total, item) => {
+        const itemTotal =
+          Number(item.requestedQuantity) * Number(item.unitPrice);
+        const cgst = (itemTotal * 9) / 100;
+        return total + cgst;
+      }, 0);
 
-    //   // Sgst 9%
-    //   const totalSgst = orderItems.reduce((total, item) => {
-    //     const itemTotal =
-    //       Number(item.requestedQuantity) * Number(item.unitPrice);
-    //     const sgst = (itemTotal * 9) / 100;
-    //     return total + sgst;
-    //   }, 0);
+      // Sgst 9%
+      const totalSgst = orderItems.reduce((total, item) => {
+        const itemTotal =
+          Number(item.requestedQuantity) * Number(item.unitPrice);
+        const sgst = (itemTotal * 9) / 100;
+        return total + sgst;
+      }, 0);
 
-    //   // GrandTotal
-    //   const grandTotal = afterDiscount + totalCgst + totalSgst;
+      // GrandTotal
+      const grandTotal = afterDiscount + totalCgst + totalSgst;
 
-    //   setOrderSummary({
-    //     subTotal,
-    //     discount: totalDiscount,
-    //     cgst: totalCgst,
-    //     sgst: totalSgst,
-    //     grandTotal,
-    //   });
+      setOrderSummary({
+        subTotal,
+        discount: totalDiscount,
+        cgst: totalCgst,
+        sgst: totalSgst,
+        grandTotal,
+      });
 
-    //   const poData = {
-    //     ...data,
-    //     subTotal,
-    //     discount: totalDiscount,
-    //     cgst: totalCgst,
-    //     sgst: totalSgst,
-    //     grandTotal,
-    //   };
+      const poData = {
+        ...data,
+        subTotal,
+        discount: totalDiscount,
+        cgst: totalCgst,
+        sgst: totalSgst,
+        grandTotal,
+      };
 
-    //   const response = await api.post("purchase-order/create-PO", poData);
-    //   console.log(response.data);
-    //   navigate(`/purchase-preview/${response.data.poId}`);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      const response = await api.post("purchase-order/create-PO", poData);
+      console.log(response.data);
+      alert("PO created successfully!!!");
+      // navigate(`/purchase-preview/${response.data.poId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // calculate orderItems
@@ -162,6 +162,7 @@ const CreatePO = () => {
         </div>
 
         <button
+          type="button"
           className="btn"
           onClick={() => navigate("/purchase-dashboard")}
           style={{
